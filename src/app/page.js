@@ -1,3 +1,7 @@
 export default function Home() {
-  return <>Project Created</>;
+  return (
+    <>
+      <section className="text-testpurple">Project Created</section>
+    </>
+  );
 }
