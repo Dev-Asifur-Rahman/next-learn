@@ -1,11 +1,13 @@
+import NavBar from "@/components/NavBar";
 import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <NavBar></NavBar>
         <section className="border w-full">
-          Hello
+          <p className="">App Layout</p>
           <div>{children}</div>
         </section>
       </body>
