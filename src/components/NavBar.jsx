@@ -24,7 +24,6 @@ const NavBar = () => {
     html.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
     setIsMounted(true);
-    console.log("Theme is now", theme);
   }, [theme,isMounted]);
 
   const theme_controller = (e) => {

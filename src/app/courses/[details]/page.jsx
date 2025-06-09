@@ -1,11 +1,14 @@
-import React from 'react';
+import React from "react";
 
-const page = () => {
-    return (
-        <div>
-            course details
-        </div>
-    );
+export async function generateMetadata({ params }) {
+  const details = await params.details;
+  return {
+    title: details,
+  };
+}
+
+const page = ({ params }) => {
+  return <div>course details</div>;
 };
 
 export default page;
