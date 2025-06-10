@@ -1,5 +1,10 @@
 import React from 'react';
 
+export const metadata ={
+    title : "Quiz"
+}
+
+
 const page = () => {
     return (
         <div>
