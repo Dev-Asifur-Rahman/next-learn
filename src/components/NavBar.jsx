@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Context } from "@/Context";
+import { useContext, useEffect, useState } from "react";
 
 const NavBar = () => {
+  const {greet} = useContext(Context)
   //   const [theme, setTheme] = useState(() => {
   //     if (typeof window !== "undefined") {
   //       return localStorage.getItem("theme") || "light";
@@ -11,6 +13,8 @@ const NavBar = () => {
   //   });
   const [theme, setTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
+
+  console.log(greet)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
