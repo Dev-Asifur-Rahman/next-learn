@@ -1,8 +1,5 @@
-
-
 import NavBar from "@/components/NavBar";
 import "./globals.css";
-import { Context } from "@/Context";
 
 export const metadata = {
   title: {
@@ -12,18 +9,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const greet = 'hello'
-  const Provider = {greet};
   return (
     <html lang="en">
       <body>
         <NavBar></NavBar>
-        <Context.Provider value={Provider}>
-          <section className="border w-full">
-            <p className="">App Layout</p>
-            <div>{children}</div>
-          </section>
-        </Context.Provider>
+
+        <section className="border w-full">
+          <p className="">App Layout</p>
+          <div>{children}</div>
+        </section>
       </body>
     </html>
   );
