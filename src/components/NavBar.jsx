@@ -1,19 +1,16 @@
 "use client";
 
 import { Context } from "@/Context";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 
 const NavBar = () => {
   const { greet } = useContext(Context);
-  //   const [theme, setTheme] = useState(() => {
-  //     if (typeof window !== "undefined") {
-  //       return localStorage.getItem("theme") || "light";
-  //     }
-  //     return "light";
-  //   });
   const [theme, setTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
   const [Dropdown, setDropdown] = useState(false);
+
+  const routes = [{name:'Home',href:'/'},{name:'Courses',href:'/courses'},{name:'Dashboard',href:'/dashboard'}]
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -47,7 +44,7 @@ const NavBar = () => {
           tabIndex={0}
           onClick={() => setDropdown(!Dropdown)}
         >
-          <div className="btn btn-ghost lg:hidden">
+          <div className="  p-2 lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -69,42 +66,19 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm bg-base-100 dropdown-content rounded-box z-1 mt-3 w-40 p-2 shadow"
             >
-              {/* 2. Added onClick to each <li> to close the dropdown */}
-              <li onClick={() => setDropdown(false)}>
-                <a>Item 1</a>
-              </li>
-              <li onClick={() => setDropdown(false)}>
-                <a>Item 2</a>
-              </li>
-              <li onClick={() => setDropdown(false)}>
-                <a>Item 3</a>
-              </li>
+              {
+                routes.map((route,index)=><li key={index} onClick={()=>setDropdown(false)}><Link href={route?.href}>{route?.name}</Link></li>)
+              }
             </ul>
           )}
         </div>
-        <p className="text-3xl font-bold hidden md:inline lg:inline">DaisyUI</p>
+        <p className="text-3xl font-bold hidden md:inline lg:inline">NextLearn</p>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+          {
+            routes.map((route,index)=><li key={index}><Link href={route?.href}>{route?.name}</Link></li>)
+          }
         </ul>
       </div>
       <div className="navbar-end">
