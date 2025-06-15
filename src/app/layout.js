@@ -1,11 +1,15 @@
 import NavBar from "@/components/NavBar";
 import "./globals.css";
+import { Link } from 'next/link';
 
 export const metadata = {
   title: {
     default: "NextLearn",
     template: "%s",
   },
+  icons : {
+    icon : '/next-learn-favicon.png'
+  }
 };
 
 export default function RootLayout({ children }) {
