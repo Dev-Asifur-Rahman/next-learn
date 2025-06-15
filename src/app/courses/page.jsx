@@ -1,13 +1,14 @@
+import AllCourses from '@/components/AllCourses';
 import React from 'react';
 
 export const metadata = {
     title : 'Courses'
 }
 
-const page = () => {
+const page = async() => {
     return (
         <div>
-            course route 
+           <AllCourses></AllCourses> 
         </div>
     );
 };
