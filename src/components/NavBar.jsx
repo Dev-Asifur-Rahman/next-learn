@@ -3,6 +3,7 @@
 import { Context } from "@/Context";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import LoginBtn from "./LoginBtn";
 
 const NavBar = () => {
   const { greet } = useContext(Context);
@@ -10,7 +11,11 @@ const NavBar = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [Dropdown, setDropdown] = useState(false);
 
-  const routes = [{name:'Home',href:'/'},{name:'Courses',href:'/courses'},{name:'Dashboard',href:'/dashboard'}]
+  const routes = [
+    { name: "Home", href: "/" },
+    { name: "Courses", href: "/courses" },
+    { name: "Dashboard", href: "/dashboard" },
+  ];
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -66,71 +71,79 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm bg-base-100 dropdown-content rounded-box z-1 mt-3 w-40 p-2 shadow"
             >
-              {
-                routes.map((route,index)=><li key={index} onClick={()=>setDropdown(false)}><Link href={route?.href}>{route?.name}</Link></li>)
-              }
+              {routes.map((route, index) => (
+                <li key={index} onClick={() => setDropdown(false)}>
+                  <Link href={route?.href}>{route?.name}</Link>
+                </li>
+              ))}
             </ul>
           )}
         </div>
-        <p className="text-3xl font-bold hidden md:inline lg:inline">NextLearn</p>
+        <p className="text-3xl font-bold hidden md:inline lg:inline">
+          NextLearn
+        </p>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          {
-            routes.map((route,index)=><li key={index}><Link href={route?.href}>{route?.name}</Link></li>)
-          }
+          {routes.map((route, index) => (
+            <li key={index}>
+              <Link href={route?.href}>{route?.name}</Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn">SignIn</button>
-        <label className="toggle text-base-content">
-          <input
-            type="checkbox"
-            checked={theme === "dark"}
-            onChange={theme_controller}
-            className=""
-          />
+        <div className="flex gap-2 items-center">
+          <LoginBtn></LoginBtn>
+          <label className="toggle text-base-content">
+            <input
+              type="checkbox"
+              checked={theme === "dark"}
+              onChange={theme_controller}
+              className=""
+            />
 
-          <svg
-            aria-label="sun"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
+            <svg
+              aria-label="sun"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
             >
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2"></path>
-              <path d="M12 20v2"></path>
-              <path d="m4.93 4.93 1.41 1.41"></path>
-              <path d="m17.66 17.66 1.41 1.41"></path>
-              <path d="M2 12h2"></path>
-              <path d="M20 12h2"></path>
-              <path d="m6.34 17.66-1.41 1.41"></path>
-              <path d="m19.07 4.93-1.41 1.41"></path>
-            </g>
-          </svg>
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </g>
+            </svg>
 
-          <svg
-            aria-label="moon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2"
-              fill="none"
-              stroke="currentColor"
+            <svg
+              aria-label="moon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
             >
-              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-            </g>
-          </svg>
-        </label>
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </g>
+            </svg>
+          </label>
+        </div>
       </div>
     </div>
   );
