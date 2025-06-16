@@ -1,14 +1,13 @@
 "use client";
 
-import { Context } from "@/Context";
+
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import LoginBtn from "./LoginBtn";
+import { Global_Context } from "@/providers/ContextProvider";
 
 const NavBar = () => {
-  const { greet } = useContext(Context);
-  const [theme, setTheme] = useState("light");
-  const [isMounted, setIsMounted] = useState(false);
+  const {theme,setTheme} = useContext(Global_Context)
   const [Dropdown, setDropdown] = useState(false);
 
   const routes = [
@@ -17,19 +16,8 @@ const NavBar = () => {
     { name: "Dashboard", href: "/dashboard" },
   ];
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setTheme(savedTheme);
-    setIsMounted(true);
-  }, []);
+ 
 
-  useEffect(() => {
-    if (!isMounted) return;
-    const html = document.documentElement;
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    setIsMounted(true);
-  }, [theme, isMounted]);
 
   const theme_controller = (e) => {
     if (e.target.checked) {
