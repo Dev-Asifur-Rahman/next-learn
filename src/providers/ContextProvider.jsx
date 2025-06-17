@@ -2,11 +2,12 @@
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { createContext, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 export const Global_Context = createContext(null);
 
 const ContextProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -18,9 +19,9 @@ const ContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
-}, [theme]);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const Context_Value = {
     loading,
@@ -31,8 +32,13 @@ const ContextProvider = ({ children }) => {
 
   return (
     <Global_Context.Provider value={Context_Value}>
-      {!loading ? children : (
-         <LoadingSpinner></LoadingSpinner>
+      {!loading ? (
+        <div>
+          {children}
+          <Toaster />
+        </div>
+      ) : (
+        <LoadingSpinner></LoadingSpinner>
       )}
     </Global_Context.Provider>
   );

@@ -26,8 +26,8 @@ export default async function RootLayout({ children }) {
             <NavBar></NavBar>
             <section className="border w-full">
               <p className="">App Layout</p>
-              <p>{JSON.stringify(session)}</p>
-              <UserInfo></UserInfo>
+              {/* <p>{JSON.stringify(session)}</p> */}
+              {/* <UserInfo></UserInfo> */}
               <div>{children}</div>
             </section>
           </ContextProvider>

@@ -2,7 +2,7 @@
 
 
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import LoginBtn from "./LoginBtn";
 import { Global_Context } from "@/providers/ContextProvider";
 

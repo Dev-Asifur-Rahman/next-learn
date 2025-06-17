@@ -1,7 +1,10 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 export const collections = {
-  courses:'courses'
+  courses:'courses',
+  admin:'admin',
+  instructor:'instructor',
+  student:'student'
 }
 
 export default function mongoDb(collection_name) {
