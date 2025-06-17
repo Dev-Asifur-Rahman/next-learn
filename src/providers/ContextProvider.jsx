@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { createContext, useEffect, useState } from "react";
 
 export const Global_Context = createContext(null);
@@ -31,9 +32,7 @@ const ContextProvider = ({ children }) => {
   return (
     <Global_Context.Provider value={Context_Value}>
       {!loading ? children : (
-        <div className="flex justify-center items-center h-screen w-screen text-2xl">
-          Loading...
-        </div>
+         <LoadingSpinner></LoadingSpinner>
       )}
     </Global_Context.Provider>
   );
