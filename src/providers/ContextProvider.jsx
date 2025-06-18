@@ -1,15 +1,17 @@
 "use client";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useSession } from "next-auth/react";
 import { createContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 export const Global_Context = createContext(null);
 
 const ContextProvider = ({ children }) => {
+  const session = useSession()
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("light");
-
+  console.log(session)
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
@@ -32,7 +34,7 @@ const ContextProvider = ({ children }) => {
 
   return (
     <Global_Context.Provider value={Context_Value}>
-      {!loading ? (
+      {!loading && (session.status === 'authenticated'||session.status==='unauthenticated')? (
         <div>
           {children}
           <Toaster />

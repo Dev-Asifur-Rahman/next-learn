@@ -18,15 +18,23 @@ export const authOptions = {
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
         // user = {email:credentials.email,password:credentials.password}
-        const user = await loginUser(credentials)
+        const user = await loginUser(credentials);
         if (user) {
-          // if you console it will show user but in front end it will send next auths built in object error null 
-          return user;
+          // if you console it will show user but in front end it will send next auths built in object error null
+          return {
+            userId: user.userId,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            image: user.profileImage,
+            location: user.location,
+            joinedAt: user.joinedAt,
+          };
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
 
-        //   // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          //   // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
     }),

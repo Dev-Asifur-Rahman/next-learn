@@ -1,23 +1,22 @@
 "use client";
 
-
 import Link from "next/link";
 import { useContext, useState } from "react";
 import LoginBtn from "./LoginBtn";
 import { Global_Context } from "@/providers/ContextProvider";
+import { useSession } from "next-auth/react";
+import LogoutBtn from "./LogoutBtn";
 
 const NavBar = () => {
-  const {theme,setTheme} = useContext(Global_Context)
+  const { theme, setTheme } = useContext(Global_Context);
   const [Dropdown, setDropdown] = useState(false);
-
+  const session = useSession();
+  console.log(session);
   const routes = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
     { name: "Dashboard", href: "/dashboard" },
   ];
-
- 
-
 
   const theme_controller = (e) => {
     if (e.target.checked) {
@@ -82,7 +81,12 @@ const NavBar = () => {
       </div>
       <div className="navbar-end">
         <div className="flex gap-2 items-center">
-          <LoginBtn></LoginBtn>
+          {session?.status === "authenticated" ? (
+            <LogoutBtn></LogoutBtn>
+          ) : (
+            <LoginBtn></LoginBtn>
+          )}
+
           <label className="toggle text-base-content">
             <input
               type="checkbox"

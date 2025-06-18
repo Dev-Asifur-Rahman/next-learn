@@ -1,3 +1,4 @@
+import GoogleLogin from "@/components/GoogleLogin";
 import LoginForm from "./LoginForm";
 
 const page = () => {
@@ -10,6 +11,7 @@ const page = () => {
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <LoginForm></LoginForm>
+            <GoogleLogin></GoogleLogin>
           </div>
         </div>
       </div>
