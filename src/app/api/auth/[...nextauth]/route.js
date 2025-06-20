@@ -1,6 +1,7 @@
 import loginUser from "@/actions/auth/loginUser";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
   providers: [
@@ -21,15 +22,7 @@ export const authOptions = {
         const user = await loginUser(credentials);
         if (user) {
           // if you console it will show user but in front end it will send next auths built in object error null
-          return {
-            userId: user.userId,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            image: user.profileImage,
-            location: user.location,
-            joinedAt: user.joinedAt,
-          };
+          return user
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
@@ -38,6 +31,10 @@ export const authOptions = {
         }
       },
     }),
+    GoogleProvider({
+    clientId: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET
+  })
   ],
   pages: {
     signIn: "/auth/login",
