@@ -4,11 +4,12 @@ import registerUser from "@/actions/auth/registerUser";
 import imageUpload from "@/lib/imageUpload";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const RegisterForm = () => {
-  const router = useRouer();
+  const router = useRouter();
   const session = useSession();
   const handleRegister = async (e) => {
     e.preventDefault();
