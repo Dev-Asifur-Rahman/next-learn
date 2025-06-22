@@ -50,24 +50,30 @@ export const authOptions = {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         const gmail = user?.email;
-        const student = mongoDb(collections.student);
-        const user_exists = await student.findOne({ email: gmail });
+        const students = mongoDb(collections.student);
+        const admins = mongoDb(collections.admin);
+        const instructors = mongoDb(collections.instructor);
 
-        if (!user_exists) {
-          console.log(user)
-          const count = await student.countDocuments();
+        const [student, admin, instructor] = await Promise.all([
+          students.findOne({ email: gmail }),
+          admins.findOne({ email: gmail }),
+          instructors.findOne({ email: gmail }),
+        ]);
+
+        if (!student && !admin && !instructor) {
+          const count = await students.countDocuments();
           const student_data = {
             userId: `s${String(count + 1).padStart(3, "0")}`,
             name: user?.name,
             email: gmail,
             role: "student",
-            profileImage: user?.picture,
+            profileImage: user?.image,
             location: null,
             joinedAt: dayjs().tz("Asia/Dhaka").format(),
             enrolledCourses: [],
           };
 
-          await student.insertOne(student_data);
+          await students.insertOne(student_data);
         }
       }
 
@@ -75,16 +81,38 @@ export const authOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        // token.id = user.id;
-        // token.role = user.role || "student";
+        const email = user?.email;
+        const students = mongoDb(collections.student);
+        const admins = mongoDb(collections.admin);
+        const instructors = mongoDb(collections.instructor);
+
+        const [student, admin, instructor] = await Promise.all([
+          students.findOne({ email }),
+          admins.findOne({ email }),
+          instructors.findOne({ email }),
+        ]);
+
+        const dbUser = admin || instructor || student;
+
+        if (dbUser) {
+          token._id = dbUser._id.toString();
+          token.name = dbUser.name;
+          token.email = dbUser.email;
+          token.role = dbUser.role;
+        }
       }
 
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        // session.user.id = token.id;
-        // session.user.role = token.role;
+        if (session.user && token) {
+          session.user._id = token._id;
+          session.user.name = token.name;
+          session.user.email = token.email;
+          session.user.image = token.picture || token.image;
+          session.user.role = token.role;
+        }
       }
       return session;
     },

@@ -11,7 +11,7 @@ const NavBar = () => {
   const { theme, setTheme } = useContext(Global_Context);
   const [Dropdown, setDropdown] = useState(false);
   const session = useSession();
-  
+  console.log(session)
   const routes = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
