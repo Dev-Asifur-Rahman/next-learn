@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const router = useRouter();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const target = e.target;

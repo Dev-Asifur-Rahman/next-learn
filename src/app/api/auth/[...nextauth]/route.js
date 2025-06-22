@@ -1,7 +1,14 @@
 import loginUser from "@/actions/auth/loginUser";
+import mongoDb, { collections } from "@/lib/mongoConnect";
+import dayjs from "dayjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const authOptions = {
   providers: [
@@ -22,7 +29,7 @@ export const authOptions = {
         const user = await loginUser(credentials);
         if (user) {
           // if you console it will show user but in front end it will send next auths built in object error null
-          return user
+          return user;
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
@@ -32,12 +39,59 @@ export const authOptions = {
       },
     }),
     GoogleProvider({
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET
-  })
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
   pages: {
     signIn: "/auth/login",
+  },
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        const gmail = user?.email;
+        const student = mongoDb(collections.student);
+        const user_exists = await student.findOne({ email: gmail });
+
+        if (!user_exists) {
+          console.log(user)
+          const count = await student.countDocuments();
+          const student_data = {
+            userId: `s${String(count + 1).padStart(3, "0")}`,
+            name: user?.name,
+            email: gmail,
+            role: "student",
+            profileImage: user?.picture,
+            location: null,
+            joinedAt: dayjs().tz("Asia/Dhaka").format(),
+            enrolledCourses: [],
+          };
+
+          await student.insertOne(student_data);
+        }
+      }
+
+      return true;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        // token.id = user.id;
+        // token.role = user.role || "student";
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        // session.user.id = token.id;
+        // session.user.role = token.role;
+      }
+      return session;
+    },
+  },
+
+  session: {
+    strategy: "jwt",
   },
 };
 

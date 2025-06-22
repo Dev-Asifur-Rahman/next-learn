@@ -11,7 +11,6 @@ const ContextProvider = ({ children }) => {
   const session = useSession()
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("light");
-  console.log(session)
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
