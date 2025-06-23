@@ -20,7 +20,7 @@ const LoginForm = () => {
     });
     if (res.ok) {
       toast.success("Login Successful");
-      router.push('/')
+      router.push("/");
     } else return toast.error("Login Failed");
   };
   return (
@@ -46,7 +46,27 @@ const LoginForm = () => {
             Register Now
           </Link>
         </div>
-        <button className="btn btn-neutral mt-4">SignIn</button>
+        <button className="btn mt-4 bg-white dark:bg-transparent border dark:border-white  dark:text-white text-black ">
+          <svg
+            aria-label="Email icon"
+            width="16"
+            height="16"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            className="stroke-black dark:stroke-white"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2"
+              fill="none"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </g>
+          </svg>
+          Login with Email
+        </button>
       </fieldset>
     </form>
   );

@@ -1,4 +1,3 @@
-import NavBar from "@/components/NavBar";
 import "./globals.css";
 import NextAuthSessionProvider from "@/providers/NextAuthSessionProvider";
 import ContextProvider from "@/providers/ContextProvider";
@@ -23,8 +22,8 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <NextAuthSessionProvider>
         <body>
-          <BProgressLoader>
-            <ContextProvider>
+          <ContextProvider>
+            <BProgressLoader>
               <ConditionalNav></ConditionalNav>
               <section className="w-full">
                 <p className="">App Layout</p>
@@ -32,8 +31,8 @@ export default async function RootLayout({ children }) {
                 {/* <UserInfo></UserInfo> */}
                 <div>{children}</div>
               </section>
-            </ContextProvider>
-          </BProgressLoader>
+            </BProgressLoader>
+          </ContextProvider>
         </body>
       </NextAuthSessionProvider>
     </html>
