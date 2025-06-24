@@ -11,9 +11,6 @@ export const metadata = {
     default: "NextLearn",
     template: "%s",
   },
-  icons: {
-    icon: "/next-learn-favicon.png",
-  },
 };
 
 export default async function RootLayout({ children }) {
@@ -26,7 +23,6 @@ export default async function RootLayout({ children }) {
             <BProgressLoader>
               <ConditionalNav></ConditionalNav>
               <section className="w-full">
-                <p className="">App Layout</p>
                 {/* <p>{JSON.stringify(session)}</p> */}
                 {/* <UserInfo></UserInfo> */}
                 <div>{children}</div>
