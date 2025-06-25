@@ -61,7 +61,7 @@ export default function QuizGeneratorPage() {
         <div className="mt-6 space-y-3">
           <h2 className="text-xl font-semibold">Generated Questions:</h2>
           {questions.map((q, i) => (
-            <div key={i} className="p-3 bg-gray-100 rounded">
+            <div key={i} className="p-3 bg-gray-100 dark:bg-gray-700 rounded">
               <p>{i + 1}. {q}</p>
             </div>
           ))}
