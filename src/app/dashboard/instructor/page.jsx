@@ -1,4 +1,4 @@
-import React from 'react';
+
 import InstructorResponsiveDashboard from './../../../components/InstructorResponsiveDashboard';
 
 export const metadata ={

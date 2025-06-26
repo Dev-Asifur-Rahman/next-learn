@@ -1,0 +1,62 @@
+'use client'
+import React, { useState } from 'react';
+
+const InstructorTabBar = () => {
+   const [activeTab, setActiveTab] = useState("dashboard");
+   
+     return (
+       <div className="min-h-screen flex flex-col justify-between">
+         {/* Main Content Area */}
+         <main className="p-4">
+           {activeTab === "analytics" && (
+             <p className="text-lg font-semibold">Analytics</p>
+           )}
+           {activeTab === "courses" && (
+             <p className="text-lg font-semibold"> Courses</p>
+           )}
+           {activeTab === "profile" && (
+             <p className="text-lg font-semibold">Instructor Profile</p>
+           )}
+         </main>
+   
+         {/* Bottom Tab Bar */}
+         <nav className="fixed bottom-0 left-0 w-full bg-base-200 border-t border-base-300 flex justify-around items-center py-2 z-50 shadow-md">
+           <button
+             onClick={() => setActiveTab("analytics")}
+             className={`flex flex-col items-center text-sm ${
+               activeTab === "dashboard"
+                 ? " font-bold"
+                 : "text-base-content"
+             }`}
+           >
+             Analytics
+           </button>
+   
+           <button
+             onClick={() => setActiveTab("courses")}
+             className={`flex flex-col items-center text-sm ${
+               activeTab === "courses"
+                 ? " font-bold"
+                 : "text-base-content"
+             }`}
+           >
+             Courses
+           </button>
+   
+   
+           <button
+             onClick={() => setActiveTab("profile")}
+             className={`flex flex-col items-center text-sm ${
+               activeTab === "profile"
+                 ? " font-bold"
+                 : "text-base-content"
+             }`}
+           >
+             Profile
+           </button>
+         </nav>
+       </div>
+     );
+};
+
+export default InstructorTabBar;
