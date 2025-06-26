@@ -1,4 +1,5 @@
 import React from 'react';
+import InstructorResponsiveDashboard from './../../../components/InstructorResponsiveDashboard';
 
 export const metadata ={
     title : "Instructor | Dashboard"
@@ -6,11 +7,7 @@ export const metadata ={
 
 
 const page = () => {
-    return (
-        <div>
-            instructor page
-        </div>
-    );
+    return <InstructorResponsiveDashboard></InstructorResponsiveDashboard>
 };
 
 export default page;

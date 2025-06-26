@@ -1,4 +1,4 @@
-import React from 'react';
+import StudentResponsiveDashboard from '@/components/StudentResponsiveDashboard';
 
 export const metadata ={
     title : "Student | Dashboard"
@@ -6,11 +6,7 @@ export const metadata ={
 
 
 const page = () => {
-    return (
-        <div>
-            student page
-        </div>
-    );
+    return <StudentResponsiveDashboard></StudentResponsiveDashboard>
 };
 
 export default page;
