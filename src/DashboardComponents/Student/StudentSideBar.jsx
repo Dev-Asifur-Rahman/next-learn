@@ -1,6 +1,22 @@
-import React from "react";
+'use client'
+
+import { useState } from "react";
 
 const StudentSideBar = () => {
+  const [activeTab, setActiveTab] = useState("Analytics");
+
+  const tabs = [
+    "Analytics",
+    "Courses",
+    "Profile",
+  ];
+
+  const components = {
+    Analytics: "<Analytics />",
+    Courses: "<Courses />",
+    Profile: "<Profile />",
+  };
+
   return (
     <div className="drawer lg:drawer-open">
       {/* Hidden checkbox to toggle drawer on small screens */}
@@ -8,19 +24,7 @@ const StudentSideBar = () => {
 
       {/* Main content */}
       <div className="drawer-content flex flex-col">
-        {/* Toggle button visible only on small screens */}
-        <label
-          htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden m-4"
-        >
-          Open drawer
-        </label>
-
-        {/* Page content here */}
-        <div className="p-4">
-          <h1 className="text-2xl font-bold">Main Content</h1>
-          <p>This content adjusts based on screen size.</p>
-        </div>
+        <div className="p-4 border w-full">{components[activeTab]}</div>
       </div>
 
       {/* Sidebar drawer */}
@@ -31,13 +35,20 @@ const StudentSideBar = () => {
           aria-label="close sidebar"
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-          {/* Sidebar content here */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          {tabs.map((tab, index) => (
+            <li key={index}>
+              <a
+                onClick={() => setActiveTab(tab)}
+                className={`${
+                  activeTab === tab
+                    ? "dark:bg-white bg-black text-white dark:text-black font-bold"
+                    : ""
+                }`}
+              >
+                {tab}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

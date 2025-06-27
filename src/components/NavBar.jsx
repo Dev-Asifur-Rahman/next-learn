@@ -6,17 +6,18 @@ import LoginBtn from "./LoginBtn";
 import { Global_Context } from "@/providers/ContextProvider";
 import { useSession } from "next-auth/react";
 import LogoutBtn from "./LogoutBtn";
-import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const { theme, setTheme } = useContext(Global_Context);
   const [Dropdown, setDropdown] = useState(false);
   const session = useSession();
 
+  const role = session?.data?.user?.role || "student"; // added role extraction
+
   const routes = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
-    { name: "Dashboard", href: "/dashboard" },
+    { name: "Dashboard", href: `/dashboard/${role}` }, // updated dashboard href
   ];
 
   const theme_controller = (e) => {
