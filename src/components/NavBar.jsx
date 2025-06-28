@@ -12,12 +12,12 @@ const NavBar = () => {
   const [Dropdown, setDropdown] = useState(false);
   const session = useSession();
 
-  const role = session?.data?.user?.role || "student"; // added role extraction
+  const role = session?.data?.user?.role || "student";
 
   const routes = [
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
-    { name: "Dashboard", href: `/dashboard/${role}` }, // updated dashboard href
+    { name: "Dashboard", href: `/dashboard/${role}` },
   ];
 
   const theme_controller = (e) => {
@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar">
       <div className="navbar-start">
         <div
           className="dropdown"
@@ -68,9 +68,11 @@ const NavBar = () => {
             </ul>
           )}
         </div>
-        <p className="text-3xl font-bold hidden md:inline lg:inline">
-          NextLearn
-        </p>
+        <Link href={'/'}>
+          <p className="text-3xl font-bold hidden md:inline lg:inline">
+            NextLearn
+          </p>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
