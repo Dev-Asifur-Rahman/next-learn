@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import AdminAnalytics from "./AdminComponents/AdminAnalytics";
+import Profile from "../Profile";
 
 const AdminTab = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
@@ -14,12 +16,12 @@ const AdminTab = () => {
   ];
 
   const components = {
-    Analytics: "<Analytics />",
+    Analytics: <AdminAnalytics />,
     Admin: " <Admin />",
     Courses: "<Courses />",
     Instructor: "<Instructor />",
     Students: " <Students />",
-    Profile: "<Profile />",
+    Profile: <Profile />,
   };
 
   return (

@@ -1,21 +1,23 @@
 "use client";
 import { useState } from "react";
+import Profile from "../Profile";
+import StudentAnalytics from "./StudentComponents/StudentAnalytics";
 
 const StudentTabBar = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("analytics");
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
       {/* Main Content Area */}
       <main className="p-4">
         {activeTab === "analytics" && (
-          <p className="text-lg font-semibold">Analytics</p>
+          <StudentAnalytics></StudentAnalytics>
         )}
         {activeTab === "courses" && (
           <p className="text-lg font-semibold">Enrolled Courses</p>
         )}
         {activeTab === "profile" && (
-          <p className="text-lg font-semibold">Student Profile</p>
+          <Profile></Profile>
         )}
       </main>
 

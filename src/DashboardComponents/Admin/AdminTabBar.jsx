@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import AdminAnalytics from "./AdminComponents/AdminAnalytics";
+import Profile from "../Profile";
 
 const AdminTabBar = () => {
   const [activeTab, setActiveTab] = useState("analytics");
@@ -9,7 +11,7 @@ const AdminTabBar = () => {
       {/* Main Content Area */}
       <main className="p-4">
         {activeTab === "analytics" && (
-          <p className="text-lg font-semibold">Analytics</p>
+          <AdminAnalytics></AdminAnalytics>
         )}
         {activeTab === "courses" && (
           <p className="text-lg font-semibold"> Courses</p>
@@ -18,7 +20,7 @@ const AdminTabBar = () => {
           <p className="text-lg font-semibold">Users</p>
         )}
         {activeTab === "profile" && (
-          <p className="text-lg font-semibold">Admin Profile</p>
+          <Profile></Profile>
         )}
       </main>
 

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from "react";
+import InstructorAnalytics from "./InstructorComponents/InstructorAnalytics";
+import Profile from "../Profile";
 
 const InstructorTab = () => {
     const [activeTab, setActiveTab] = useState("Analytics");
@@ -12,9 +14,9 @@ const InstructorTab = () => {
       ];
     
       const components = {
-        Analytics: "<Analytics />", 
+        Analytics: <InstructorAnalytics />, 
         Courses: "<Courses />",
-        Profile: "<Profile />",
+        Profile: <Profile />,
       };
     
       return (

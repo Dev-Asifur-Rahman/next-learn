@@ -1,5 +1,7 @@
 'use client'
 import React, { useState } from 'react';
+import InstructorAnalytics from './InstructorComponents/InstructorAnalytics';
+import Profile from '../Profile';
 
 const InstructorTabBar = () => {
    const [activeTab, setActiveTab] = useState("analytics");
@@ -9,13 +11,13 @@ const InstructorTabBar = () => {
          {/* Main Content Area */}
          <main className="p-4">
            {activeTab === "analytics" && (
-             <p className="text-lg font-semibold">Analytics</p>
+             <InstructorAnalytics></InstructorAnalytics>
            )}
            {activeTab === "courses" && (
              <p className="text-lg font-semibold"> Courses</p>
            )}
            {activeTab === "profile" && (
-             <p className="text-lg font-semibold">Instructor Profile</p>
+             <Profile></Profile>
            )}
          </main>
    
