@@ -59,7 +59,6 @@ export const authOptions = {
           admins.findOne({ email: gmail }),
           instructors.findOne({ email: gmail }),
         ]);
-
         if (!student && !admin && !instructor) {
           const count = await students.countDocuments();
           const student_data = {
@@ -91,7 +90,6 @@ export const authOptions = {
           admins.findOne({ email }),
           instructors.findOne({ email }),
         ]);
-
         const dbUser = admin || instructor || student;
 
         if (dbUser) {

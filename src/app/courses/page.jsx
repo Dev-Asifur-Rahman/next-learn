@@ -5,10 +5,10 @@ export const metadata = {
     title : 'Courses'
 }
 
-const page = async() => {
+const page = async({searchParams}) => {
     return (
         <div>
-           <AllCourses></AllCourses> 
+           <AllCourses searchParams={searchParams}></AllCourses> 
         </div>
     );
 };

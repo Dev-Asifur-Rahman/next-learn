@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 const InstructorTabBar = () => {
-   const [activeTab, setActiveTab] = useState("dashboard");
+   const [activeTab, setActiveTab] = useState("analytics");
    
      return (
        <div className="min-h-screen flex flex-col justify-between">
