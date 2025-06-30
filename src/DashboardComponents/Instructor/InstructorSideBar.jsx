@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import InstructorAnalytics from "./InstructorComponents/InstructorAnalytics";
 import Profile from "../Profile";
+import InstructorCourses from "./InstructorComponents/InstructorCourses";
 
 const InstructorSideBar = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
@@ -14,7 +15,7 @@ const InstructorSideBar = () => {
   
     const components = {
       Analytics: <InstructorAnalytics />,
-      Courses: "<Courses />",
+      Courses: <InstructorCourses />,
       Profile: <Profile />,
     };
   
@@ -25,7 +26,7 @@ const InstructorSideBar = () => {
 
       {/* Main content */}
       <div className="drawer-content flex flex-col">
-        <div className="p-4 border w-full">{components[activeTab]}</div>
+        <div className="p-4 w-full">{components[activeTab]}</div>
       </div>
 
       {/* Sidebar drawer */}

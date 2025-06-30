@@ -3,6 +3,7 @@
 import { useState } from "react";
 import InstructorAnalytics from "./InstructorComponents/InstructorAnalytics";
 import Profile from "../Profile";
+import InstructorCourses from "./InstructorComponents/InstructorCourses";
 
 const InstructorTab = () => {
     const [activeTab, setActiveTab] = useState("Analytics");
@@ -15,7 +16,7 @@ const InstructorTab = () => {
     
       const components = {
         Analytics: <InstructorAnalytics />, 
-        Courses: "<Courses />",
+        Courses: <InstructorCourses />,
         Profile: <Profile />,
       };
     

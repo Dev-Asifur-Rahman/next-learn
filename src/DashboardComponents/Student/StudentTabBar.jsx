@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Profile from "../Profile";
 import StudentAnalytics from "./StudentComponents/StudentAnalytics";
+import StudentCourses from "./StudentComponents/StudentCourses";
 
 const StudentTabBar = () => {
   const [activeTab, setActiveTab] = useState("analytics");
@@ -14,7 +15,7 @@ const StudentTabBar = () => {
           <StudentAnalytics></StudentAnalytics>
         )}
         {activeTab === "courses" && (
-          <p className="text-lg font-semibold">Enrolled Courses</p>
+          <StudentCourses></StudentCourses>
         )}
         {activeTab === "profile" && (
           <Profile></Profile>

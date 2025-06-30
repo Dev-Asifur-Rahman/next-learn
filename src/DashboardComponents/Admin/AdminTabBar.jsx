@@ -1,6 +1,8 @@
+'use client'
 import React, { useState } from "react";
 import AdminAnalytics from "./AdminComponents/AdminAnalytics";
 import Profile from "../Profile";
+import AllCoursesAdmin from "./AdminComponents/AllCourseAdmins";
 
 const AdminTabBar = () => {
   const [activeTab, setActiveTab] = useState("analytics");
@@ -14,7 +16,7 @@ const AdminTabBar = () => {
           <AdminAnalytics></AdminAnalytics>
         )}
         {activeTab === "courses" && (
-          <p className="text-lg font-semibold"> Courses</p>
+          <AllCoursesAdmin></AllCoursesAdmin>
         )}
         {activeTab === "users" && (
           <p className="text-lg font-semibold">Users</p>

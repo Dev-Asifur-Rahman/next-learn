@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import AdminAnalytics from "./AdminComponents/AdminAnalytics";
 import Profile from "../Profile";
+import AllAdmins from "./AdminComponents/AllAdmins";
+import AllInstructors from "./AdminComponents/AllInstructors";
+import AllStudents from "./AdminComponents/AllStudents";
+import AllCoursesAdmin from "./AdminComponents/AllCourseAdmins";
 
 const AdminTab = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
@@ -17,10 +21,10 @@ const AdminTab = () => {
 
   const components = {
     Analytics: <AdminAnalytics />,
-    Admin: " <Admin />",
-    Courses: "<Courses />",
-    Instructor: "<Instructor />",
-    Students: " <Students />",
+    Admin:  <AllAdmins />,
+    Courses: <AllCoursesAdmin />,
+    Instructor: <AllInstructors />,
+    Students: <AllStudents />,
     Profile: <Profile />,
   };
 

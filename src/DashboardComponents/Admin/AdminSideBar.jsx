@@ -2,6 +2,11 @@
 import React, { useState } from "react";
 import AdminAnalytics from "./AdminComponents/AdminAnalytics";
 import Profile from "../Profile";
+import AllStudents from "./AdminComponents/AllStudents";
+import AllInstructors from "./AdminComponents/AllInstructors";
+import AllCoursesAdmin from "./AdminComponents/AllCourseAdmins";
+import AllAdmins from "./AdminComponents/AllAdmins";
+
 
 const AdminSideBar = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
@@ -10,10 +15,10 @@ const AdminSideBar = () => {
 
   const components = {
     Analytics: <AdminAnalytics />,
-    Admin: "<Admin />",
-    Courses: "<Courses />",
-    Instructor: "<Instructor />",
-    Students: "<Students />",
+    Admin: <AllAdmins></AllAdmins>,
+    Courses: <AllCoursesAdmin/>,
+    Instructor: <AllInstructors />,
+    Students: <AllStudents />,
     Profile: <Profile />,
   };
 
@@ -24,7 +29,7 @@ const AdminSideBar = () => {
 
       {/* Main content */}
       <div className="drawer-content flex flex-col">
-        <div className="p-4 border w-full">
+        <div className="p-4 w-full">
           {components[activeTab]}
         </div>
       </div>

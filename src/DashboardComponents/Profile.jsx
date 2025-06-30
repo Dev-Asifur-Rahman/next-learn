@@ -1,19 +1,22 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
-  const user = {
-    // Change role to test student, instructor, or admin
-    role: "student",
-    userId: "s001",
-    name: "Sadia Noor",
-    email: "sadia.noor@studentmail.com",
-    profileImage: "https://i.ibb.co/xJ6ktCx/student.png",
-    location: "Chittagong, Bangladesh",
-    joinedAt: "2025-06-10T15:30:00+06:00",
-    enrolledCourses: [],
-  };
+  const [loading,setLoading] = useState(true)
+  const [user,setUser] = useState(null)
+
+  useEffect(()=>{
+    const fetchUser = async() =>{
+      const res = await axios.get('/api/user')
+      console.log(res.data.profileImage)
+      setUser(res.data)
+      setLoading(false)
+    }
+    fetchUser()
+  },[])
 
   // Uncomment to test instructor data
   /*
@@ -40,77 +43,76 @@ const Profile = () => {
     joinedAt: "2025-06-01T16:00:00+06:00",
   };
   */
+  if (loading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
+  if (!user) {
+    return <div className="text-center py-10">No user data found.</div>;
+  }
   return (
-    <section className="max-w-3xl mx-auto px-4 py-10">
-      <div className=" rounded-lg shadow-md p-6 flex flex-col sm:flex-row items-center gap-6">
+    <section className="max-w-3xl mx-auto px-4 py-10 " >
+      <div className="rounded-lg shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] p-6 flex flex-col sm:flex-row items-center gap-6">
         {/* Profile Image */}
-        {user.profileImage && (
-          <div className="w-32 h-32 rounded-full overflow-hidden   border-4">
-            {/* <Image
-              src={user.profileImage}
-              alt={user.name}
-              width={128}
-              height={128}
-              className="object-cover w-full h-full"
-            /> */}
-            <img
+        {user?.profileImage && (
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4">
+            <Image
               src={user.profileImage}
               alt={user.name}
               width={128}
               height={128}
               className="object-cover w-full h-full"
             />
+            {/* <img
+              src={user?.profileImage}
+              alt={user?.name}
+              width={128}
+              height={128}
+              className="object-cover w-full h-full"
+            /> */}
           </div>
         )}
 
-        {/* Profile Details */}
         <div className="text-center sm:text-left space-y-2">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-            {user.name}
+            {user?.name}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-300">
-            {user.email}
+            {user?.email}
           </p>
           <p className="text-sm font-medium text-violet-600 dark:text-violet-400 uppercase">
-            {user.role}
+            {user?.role}
           </p>
 
           {/* Role-specific fields */}
-          {user.role === "student" && (
+          {user?.role === "student" && (
             <>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Location: {user.location}
+                Location: {user?.location}
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Enrolled Courses: {user.enrolledCourses.length}
+                Enrolled Courses: {user?.enrolledCourses?.length || 0}
               </p>
             </>
           )}
 
-          {user.role === "instructor" && (
+          {user?.role === "instructor" && (
             <>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Specialization: {user.specialization}
+                Specialization: {user?.specialization}
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Location: {user.location}
+                Location: {user?.location}
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Bio: {user.bio}
+                Bio: {user?.bio}
               </p>
             </>
-          )}
-
-          {user.role === "admin" && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Admin joined at: {new Date(user.joinedAt).toLocaleDateString()}
-            </p>
           )}
 
           {/* Joined At */}
           <p className="text-xs text-gray-400">
-            Joined at: {new Date(user.joinedAt).toLocaleString()}
+            Joined at: {new Date(user?.joinedAt).toLocaleString()}
           </p>
         </div>
       </div>
@@ -119,3 +121,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
