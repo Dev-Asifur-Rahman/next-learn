@@ -21,8 +21,8 @@ const page = async ({ params }) => {
   const courses = await mongoDb(collections.courses);
   const course_details = await courses.findOne({
     _id: new ObjectId(course_id),
-    
-  });
+  }
+);
   return (
     <section className="lg:h-[calc(100vh-64px)] lg:mt-0 mt-10 md:mt-16 w-full flex justify-center items-center">
       <div
