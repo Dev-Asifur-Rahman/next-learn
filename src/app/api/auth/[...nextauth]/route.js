@@ -50,9 +50,9 @@ export const authOptions = {
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         const gmail = user?.email;
-        const students = mongoDb(collections.student);
-        const admins = mongoDb(collections.admin);
-        const instructors = mongoDb(collections.instructor);
+        const students = await mongoDb(collections.student);
+        const admins = await mongoDb(collections.admin);
+        const instructors = await mongoDb(collections.instructor);
 
         const [student, admin, instructor] = await Promise.all([
           students.findOne({ email: gmail }),
@@ -81,9 +81,9 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         const email = user?.email;
-        const students = mongoDb(collections.student);
-        const admins = mongoDb(collections.admin);
-        const instructors = mongoDb(collections.instructor);
+        const students = await mongoDb(collections.student);
+        const admins = await mongoDb(collections.admin);
+        const instructors = await mongoDb(collections.instructor);
 
         const [student, admin, instructor] = await Promise.all([
           students.findOne({ email }),

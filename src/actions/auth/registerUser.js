@@ -9,7 +9,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const registerUser = async (user) => {
-  const student_collection = mongoDb(collections.student);
+  const student_collection = await mongoDb(collections.student);
   const { name, email, profileImage, location,enrolledCourses,password } = user;
   const students = await student_collection.find({}).toArray();
   const find_student = await student_collection.findOne({ email: email });

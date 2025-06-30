@@ -6,9 +6,9 @@ import bcrypt from "bcrypt";
 const loginUser = async (user) => {
   const { email, password } = user;
 
-  const students = mongoDb(collections.student);
-  const admins = mongoDb(collections.admin);
-  const instructors = mongoDb(collections.instructor);
+  const students = await mongoDb(collections.student);
+  const admins = await mongoDb(collections.admin);
+  const instructors =await mongoDb(collections.instructor);
 
   const [student, admin, instructor] = await Promise.all([
     students.findOne({ email: email }),

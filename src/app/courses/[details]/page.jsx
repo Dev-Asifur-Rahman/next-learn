@@ -1,11 +1,12 @@
 
+import EnrollBtn from "@/components/EnrollBtn";
 import mongoDb, { collections } from "@/lib/mongoConnect";
 import { ObjectId } from "mongodb";
 import React from "react";
 
 export async function generateMetadata({ params }) {
   const course_id = await params.details;
-  const courses = mongoDb(collections.courses);
+  const courses = await mongoDb(collections.courses);
   const course_details = await courses.findOne({
     _id: new ObjectId(course_id),
   });
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }) {
 
 const page = async ({ params }) => {
   const course_id = await params.details;
-  const courses = mongoDb(collections.courses);
+  const courses = await mongoDb(collections.courses);
   const course_details = await courses.findOne({
     _id: new ObjectId(course_id),
     
@@ -70,9 +71,7 @@ const page = async ({ params }) => {
         </p>
 
         {/* Enroll Button */}
-        <button className="btn btn-dash w-28 mt-4 bg-white dark:bg-transparent border dark:border-white  dark:text-white text-black ">
-          Enroll
-        </button>
+        <EnrollBtn courseId={course_details?._id} courseName={course_details?.title}></EnrollBtn>
       </div>
     </section>
   );

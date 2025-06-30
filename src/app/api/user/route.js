@@ -9,10 +9,10 @@ export async function GET(req) {
   }
 
   const email = token.email;
-
-  const students = mongoDb(collections.student);
-  const instructors = mongoDb(collections.instructor);
-  const admins = mongoDb(collections.admin);
+  
+  const students = await mongoDb(collections.student);
+  const instructors = await mongoDb(collections.instructor);
+  const admins = await mongoDb(collections.admin);
 
   
   const [student, instructor, admin] = await Promise.all([

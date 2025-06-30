@@ -7,13 +7,11 @@ const AllCourses = async ({ searchParams }) => {
   const page = parseInt(searchParams.page) || 1;
   const limit = 8;
   const skip = (page - 1) * limit;
-  const data = await mongoDb(collections.courses)
-    .find({})
-    .skip(skip)
-    .limit(limit)
-    .toArray();
+  const courses = await mongoDb(collections.courses);
 
-  const totalItems = await mongoDb(collections.courses).countDocuments();
+  const data = await courses.find({}).skip(skip).limit(limit).toArray();
+
+  const totalItems = await courses.countDocuments();
   const totalPages = Math.ceil(totalItems / limit);
   return (
     <section className="w-full">
