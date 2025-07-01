@@ -4,7 +4,6 @@ import Image from "next/image";
 
 const CourseCard = ({ course }) => {
   const { title, _id, courseImage } = course;
-  console.log(courseImage);
   return (
     <section className="w-full flex justify-center">
       <div className="card w-48 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md dark:shadow-lg">

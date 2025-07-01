@@ -34,7 +34,7 @@ const Hero = () => {
         {/* Right Image */}
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[400px] mt-10 md:mt-0">
           <Image
-            src="/hero-ai-illustration.png"
+            src="https://i.ibb.co/xqVHjrjF/next-learn-banner.png"
             alt="Hero Illustration"
             fill
             className="object-cover"

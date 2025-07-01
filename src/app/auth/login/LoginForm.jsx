@@ -10,6 +10,7 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Loading...");
     const target = e.target;
     const email = target.email.value;
     const password = target.password.value;
@@ -21,7 +22,11 @@ const LoginForm = () => {
     if (res.ok) {
       toast.success("Login Successful");
       router.push("/");
-    } else return toast.error("Login Failed");
+      toast.dismiss(toastId)
+    } else{
+      toast.dismiss(toastId)
+      return toast.error("Login Failed");
+    } 
   };
   return (
     <form onSubmit={handleLogin}>

@@ -11,38 +11,12 @@ const Profile = () => {
   useEffect(()=>{
     const fetchUser = async() =>{
       const res = await axios.get('/api/user')
-      console.log(res.data.profileImage)
       setUser(res.data)
       setLoading(false)
     }
     fetchUser()
   },[])
 
-  // Uncomment to test instructor data
-  /*
-  const user = {
-    role: "instructor",
-    userId: "i006",
-    name: "Farhana Sultana",
-    email: "farhana.sultana@nextlearn.com",
-    profileImage: "https://i.ibb.co/TqLc1RN3/1711954655184-1.jpg",
-    location: "Dhaka, Bangladesh",
-    joinedAt: "2025-06-01T20:10:00+06:00",
-    bio: "Specializes in Python and AI, working as a data scientist in Dhaka.",
-    specialization: "Python, AI, Data Science",
-  };
-  */
-
-  // Uncomment to test admin data
-  /*
-  const user = {
-    role: "admin",
-    userId: "a001",
-    name: "Asifur Rahman",
-    email: "asifurrahman.ac@gmail.com",
-    joinedAt: "2025-06-01T16:00:00+06:00",
-  };
-  */
   if (loading) {
     return <div className="text-center py-10">Loading...</div>;
   }

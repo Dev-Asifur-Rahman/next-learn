@@ -2,18 +2,17 @@
 
 import registerUser from "@/actions/auth/registerUser";
 import imageUpload from "@/lib/imageUpload";
-import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const RegisterForm = () => {
   const router = useRouter();
-  const session = useSession();
   const handleRegister = async (e) => {
     e.preventDefault();
     const target = e.target;
+    const toastId = toast.loading("Registering...");
     const photoFile = target.photo.files[0];
     const image = await imageUpload(photoFile);
     if (image) {
@@ -32,18 +31,27 @@ const RegisterForm = () => {
       };
       const student_data = await registerUser(user);
       if (student_data?.success) {
-        target.reset();
-        return toast.success("Registration Successful");
+        const res = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
+        if (res.ok) {
+          target.reset();
+          router.push('/')
+          toast.dismiss(toastId)
+          return toast.success("Registration Successful");
+        }
       } else {
+        toast.dismiss(toastId)
         return toast.error("Registration Failed !");
       }
     }
-  };
-  useEffect(() => {
-    if (session?.data) {
-      router.push("/");
+    else{
+      toast.dismiss(toastId)
+      return toast.error('Image Upload Failed!')
     }
-  }, [session?.data]);
+  };
   return (
     <form onSubmit={handleRegister}>
       <fieldset className="fieldset">

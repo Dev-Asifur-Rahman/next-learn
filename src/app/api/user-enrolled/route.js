@@ -8,15 +8,15 @@ export async function GET(req) {
   const email = token.email;
 
   const students = await mongoDb(collections.student);
-  const contents  = await mongoDb(collections.contents);
+  const contents = await mongoDb(collections.contents);
 
   const student = await students.findOne({ email: email });
 
   if (!student) {
     return NextResponse.json({ success: false });
   }
+
   const courseId = student.enrolledCourses || [];
-  
 
   if (courseId.length === 0) {
     return NextResponse.json(
@@ -25,7 +25,8 @@ export async function GET(req) {
     );
   }
 
-  const objectIds = courseId.map((id) => new ObjectId(id));
+  
+  const objectIds = courseId.map((course) => new ObjectId(course.id));
 
   const enrolledContents = await contents
     .find({ _id: { $in: objectIds } })

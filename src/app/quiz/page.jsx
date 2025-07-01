@@ -33,7 +33,6 @@ export default function QuizGeneratorPage() {
         body: JSON.stringify({lessons:lessons}),
       });
       const data = await res.json();
-      console.log(data)
       if (data.error) setError(data.error);
       else setQuestions(data.questions || []);
     } catch {

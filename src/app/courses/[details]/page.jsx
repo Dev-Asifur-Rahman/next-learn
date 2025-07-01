@@ -71,7 +71,7 @@ const page = async ({ params }) => {
         </p>
 
         {/* Enroll Button */}
-        <EnrollBtn courseId={course_details?._id} courseName={course_details?.title}></EnrollBtn>
+        <EnrollBtn courseId={course_id} courseName={course_details?.title}></EnrollBtn>
       </div>
     </section>
   );

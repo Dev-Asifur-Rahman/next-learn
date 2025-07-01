@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import BProgressLoader from "@/providers/BProgressLoader";
 import ConditionalNav from "@/components/ConditionalNav";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: {
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }) {
                 {/* <UserInfo></UserInfo> */}
                 <div>{children}</div>
               </section>
+              <Footer></Footer>
             </BProgressLoader>
           </ContextProvider>
         </body>
