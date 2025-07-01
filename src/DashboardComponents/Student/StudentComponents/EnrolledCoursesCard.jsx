@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 const EnrolledCoursesCard = ({ course }) => {
-  const { title ,courseImage } = course;
+  const { title ,courseImage,_id } = course;
   
   return (
     <section className="w-full flex justify-center">
@@ -23,7 +23,7 @@ const EnrolledCoursesCard = ({ course }) => {
         <div className="card-body items-center text-center">
           <h2 className=" text-base font-bold w-full truncate">{title}</h2>
           <div className=" w-full">
-            <Link href={`/courses`}>
+            <Link href={`/class/${_id}`}>
               <NormalButton name={"Continue"}></NormalButton>
             </Link>
           </div>
