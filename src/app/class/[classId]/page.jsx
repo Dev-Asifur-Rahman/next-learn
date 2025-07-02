@@ -10,7 +10,7 @@ const page = async({params}) => {
     const classLessons = classObject.content
     return (
         <div>
-            <LessonViewer lessons={classLessons}></LessonViewer>
+            <LessonViewer lessons={classLessons} id={id}></LessonViewer>
         </div>
     );
 };

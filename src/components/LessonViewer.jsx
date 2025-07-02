@@ -1,30 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const LessonViewer = ({ lessons }) => {
+const LessonViewer = ({ lessons, id }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
 
   const currentLesson = lessons[currentIndex];
+  useEffect(() => {
+    if (currentIndex === lessons.length - 1) {
+      axios.post("/api/user-enrolled", { id }).then((res) => {
+        if (res.data.showToast === false) {
+          setCompleted(true);
+          return;
+        } else {
+          
+          return;
+        }
+      });
+    }
+    setCompleted(false);
+  },[currentIndex]);
 
   const nextLesson = () => {
     if (currentIndex < lessons.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setSummary(""); // reset summary when moving to next lesson
+      setSummary("");
     } else {
       if (!completed) {
-        Swal.fire({
-          title: "Congratulations!",
-          text: "You have completed all lessons.",
-          icon: "success",
-          confirmButtonText: "OK",
+        axios.post("/api/user-enrolled", { id }).then((res) => {
+          Swal.fire({
+            title: "Congratulations!",
+            text: "You have completed all lessons.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          setCompleted(true);
         });
-        setCompleted(true);
       }
     }
   };
@@ -32,7 +48,8 @@ const LessonViewer = ({ lessons }) => {
   const prevLesson = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      setSummary(""); // reset summary when moving to previous lesson
+      setSummary("");
+      
     }
   };
 
@@ -49,7 +66,6 @@ const LessonViewer = ({ lessons }) => {
 
       setSummary(res.data.summary || "No summary returned.");
     } catch (error) {
-      console.error(error);
       setSummary("Error summarizing text.");
     } finally {
       setLoading(false);

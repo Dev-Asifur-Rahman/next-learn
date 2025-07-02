@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 const EnrollBtn = ({ courseId, courseName }) => {
   const { theme } = useContext(Global_Context);
   const role = useUserRole();
-
   const confirmEnroll = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -24,8 +23,6 @@ const EnrollBtn = ({ courseId, courseName }) => {
       if (result.isConfirmed) {
         try {
           const res = await axios.post(`/api/enroll?id=${courseId}`);
-          console.log(res.data);
-
           if (res.data.message) {
             Swal.fire({
               title: "Enrolled!",

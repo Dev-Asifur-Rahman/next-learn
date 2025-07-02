@@ -5,7 +5,6 @@ import React from "react";
 
 const EnrolledCoursesCard = ({ course }) => {
   const { title ,courseImage,_id } = course;
-  
   return (
     <section className="w-full flex justify-center">
       <div className="card w-48 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md dark:shadow-lg">

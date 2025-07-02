@@ -25,7 +25,6 @@ export async function GET(req) {
     );
   }
 
-  
   const objectIds = courseId.map((course) => new ObjectId(course.id));
 
   const enrolledContents = await contents
@@ -39,4 +38,34 @@ export async function GET(req) {
     },
     { status: 200 }
   );
+}
+
+export async function POST(req) {
+  const data = await req.json();
+  const id = data.id;
+  const token = await getToken({ req });
+  const email = token.email;
+
+  const students = await mongoDb(collections.student);
+
+  const student = await students.findOne({ email });
+  const courseObjectId = new ObjectId(id);
+
+  const courseIndex = student.enrolledCourses.findIndex((c) =>
+    c.id.equals(courseObjectId)
+  );
+
+  if (student.enrolledCourses[courseIndex].complete === true) {
+    return NextResponse.json({ success: true, showToast: false });
+  }
+  student.enrolledCourses[courseIndex].complete = true;
+  
+  const result = await students.updateOne(
+    { email },
+    { $set: { enrolledCourses: student.enrolledCourses } }
+  );
+
+  if (result.modifiedCount === 1) {
+    return NextResponse.json({ success: true, showToast: true });
+  }
 }
