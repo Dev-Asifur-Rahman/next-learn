@@ -4,9 +4,14 @@ import { NextResponse } from "next/server";
 const middleware = async (req) => {
   const token = await getToken({ req });
   const { pathname } = req.nextUrl;
+  if (pathname.startsWith("/courses/") && pathname !== "/courses") {
+    if (!token) {
+      const loginUrl = new URL("/auth/login", req.url);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
 
   if (pathname.startsWith("/dashboard")) {
-    
     if (!token) {
       const loginUrl = new URL("/auth/login", req.url);
       return NextResponse.redirect(loginUrl);

@@ -1,6 +1,10 @@
 import GoogleLogin from "@/components/GoogleLogin";
 import RegisterForm from "./RegisterForm";
 
+export const metadata = {
+  title: "Register",
+};
+
 const page = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">

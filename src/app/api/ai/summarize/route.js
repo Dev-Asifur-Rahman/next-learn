@@ -22,7 +22,6 @@ export async function POST(request) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("HuggingFace API error:", errorText);
       return NextResponse.json({ error: errorText || "Error from HuggingFace API" }, { status: response.status });
     }
 
@@ -33,7 +32,7 @@ export async function POST(request) {
       summary: data[0]?.summary_text || JSON.stringify(data) || "No summary found.",
     });
   } catch (error) {
-    console.error("Server error:", error);
+    
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

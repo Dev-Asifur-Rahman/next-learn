@@ -1,6 +1,10 @@
 import GoogleLogin from "@/components/GoogleLogin";
 import LoginForm from "./LoginForm";
 
+export const metadata = {
+  title: "LogIn",
+};
+
 const page = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">

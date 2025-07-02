@@ -19,7 +19,7 @@ const Hero = () => {
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
             <Link href={"/auth/login"}>
-              <button className="bg-black dark:border text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition">
+              <button className="bg-black dark:bg-transparent dark:border text-white px-6 py-3 rounded-full font-semibold dark:hover:text-black dark:hover:bg-white transition">
                 Get Started
               </button>
             </Link>
@@ -37,7 +37,7 @@ const Hero = () => {
             src="https://i.ibb.co/xqVHjrjF/next-learn-banner.png"
             alt="Hero Illustration"
             fill
-            className="object-cover"
+            className="object-cover rounded-md"
           />
         </div>
       </div>
