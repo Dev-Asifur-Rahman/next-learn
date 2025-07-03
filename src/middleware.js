@@ -4,16 +4,24 @@ import { NextResponse } from "next/server";
 const middleware = async (req) => {
   const token = await getToken({ req });
   const { pathname } = req.nextUrl;
+  
+  const loginUrl = new URL("/auth/login", req.url);
+  const homeUrl = new URL('/',req.url)
+
+  if(pathname.startsWith('/auth')){
+    if(token){
+      return NextResponse.redirect(homeUrl)
+    }
+  }
+
   if (pathname.startsWith("/courses/") && pathname !== "/courses") {
     if (!token) {
-      const loginUrl = new URL("/auth/login", req.url);
       return NextResponse.redirect(loginUrl);
     }
   }
 
   if (pathname.startsWith("/dashboard")) {
     if (!token) {
-      const loginUrl = new URL("/auth/login", req.url);
       return NextResponse.redirect(loginUrl);
     }
 

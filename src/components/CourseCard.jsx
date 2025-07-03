@@ -6,7 +6,7 @@ const CourseCard = ({ course }) => {
   const { title, _id, courseImage } = course;
   return (
     <section className="w-full flex justify-center">
-      <div className="card w-48 bg-white dark:bg-gray-800 text-black dark:text-white shadow-md dark:shadow-lg">
+      <div className="card w-48 bg-white dark:bg-gray-950 text-black dark:text-white shadow-md dark:shadow-lg">
         <figure className="px-6 pt-6">
           <div className="relative w-[144px] lg:w-full h-[85px] lg:h-[80px]">
             <Image
