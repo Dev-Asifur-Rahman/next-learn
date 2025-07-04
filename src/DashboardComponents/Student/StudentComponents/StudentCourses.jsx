@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import EnrolledCoursesCard from "./EnrolledCoursesCard";
 import QuizEnrolledCourseCard from "./QuizEnrolledCourseCard";
+import Link from "next/link";
 
 const StudentCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -25,14 +26,21 @@ const StudentCourses = () => {
     fetchCompletedCourses();
     fetchCourses();
   }, []);
-  if (loading && loadingSecond) return <p>Loading...</p>;
+  if (loading && loadingSecond) return <p className="w-full text-center">Loading...</p>;
 
   return (
     <section className="w-full">
       {/* In Progress Courses */}
-      <h2 className="text-xl font-semibold mb-4">In Progress Courses</h2>
+      <h2 className="text-xl font-semibold">In Progress Courses</h2>
       {courses.length === 0 ? (
-        <p>No in progress courses found.</p>
+        <div className="my-4 py-2">
+          <p className="text-lg py-2 px-4 lg:border-2 md:border-2 border rounded-xl  font-normal ">
+            No in progress courses found.
+          </p>
+          <Link href={"/courses"}>
+            <button className="btn btn-sm m-3 btn-dash">Enorll Now</button>
+          </Link>
+        </div>
       ) : (
         <section className="grid xs:grid-cols-1 ms:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 mt-4">
           {courses.map((course) => (
@@ -45,9 +53,11 @@ const StudentCourses = () => {
       )}
 
       {/* Completed Courses */}
-      <h2 className="text-xl font-semibold mt-10 mb-4">Completed Courses</h2>
+      <h2 className="text-xl font-semibold mt-6 mb-4">Completed Courses</h2>
       {completedCourses.length === 0 ? (
-        <p>No completed courses found.</p>
+        <p className="text-lg py-2 px-4 lg:border-2 md:border-2 border rounded-xl  font-normal ">
+          No completed courses found.
+        </p>
       ) : (
         <section className="grid xs:grid-cols-1 ms:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 mt-4">
           {completedCourses.map((course) => (

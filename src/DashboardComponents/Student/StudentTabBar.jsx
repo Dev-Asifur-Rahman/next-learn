@@ -27,7 +27,7 @@ const StudentTabBar = () => {
         <button
           onClick={() => setActiveTab("analytics")}
           className={`flex flex-col items-center text-sm ${
-            activeTab === "dashboard"
+            activeTab === "analytics"
               ? " font-bold"
               : "text-base-content"
           }`}

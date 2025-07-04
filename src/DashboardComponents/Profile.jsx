@@ -18,15 +18,15 @@ const Profile = () => {
   },[])
 
   if (loading) {
-    return <div className="text-center py-10">Loading...</div>;
+    return <div className="text-center w-full py-10">Loading...</div>;
   }
 
   if (!user) {
     return <div className="text-center py-10">No user data found.</div>;
   }
   return (
-    <section className="max-w-3xl mx-auto px-4 py-10 " >
-      <div className="rounded-lg shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] p-6 flex flex-col sm:flex-row items-center gap-6">
+    <section className="max-w-3xl mx-auto px-4 py-6 md:py-10 lg:py-10" >
+      <div className="rounded-lg shadow-lg dark:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)] dark:shadow-white/45 p-6 flex flex-col sm:flex-row items-center gap-6">
         {/* Profile Image */}
         {user?.profileImage && (
           <div className="w-32 h-32 rounded-full overflow-hidden border-4">
