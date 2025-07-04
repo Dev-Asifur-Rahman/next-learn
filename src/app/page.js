@@ -1,3 +1,4 @@
+import FAQ from "@/home_components/FAQ";
 import Hero from "@/home_components/Hero";
 import HowItWorks from "@/home_components/HowItWorks";
 import MapSection from "@/home_components/MapSection";
@@ -10,8 +11,9 @@ export default function Home() {
       <section className="w-full">
         <Hero></Hero>
         <HowItWorks></HowItWorks>
-        <Testimonials></Testimonials>
         <Pricing></Pricing>
+        <FAQ></FAQ>
+        <Testimonials></Testimonials>
         <MapSection></MapSection>
       </section>
     </>

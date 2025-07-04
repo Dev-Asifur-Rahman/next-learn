@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+// import banner from "/public/images/next-learn-banner-two.png"
 
 const Hero = () => {
   return (
@@ -34,7 +35,7 @@ const Hero = () => {
         {/* Right Image */}
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[400px] mt-10 md:mt-0">
           <Image
-            src="https://i.ibb.co/xqVHjrjF/next-learn-banner.png"
+            src='/images/next-learn-banner-two.png'
             alt="Hero Illustration"
             fill
             className="object-cover rounded-md"
