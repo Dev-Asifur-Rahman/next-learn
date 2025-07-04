@@ -73,12 +73,12 @@ const LessonViewer = ({ lessons, id }) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+    <div className="max-w-2xl lg:mx-auto lg:mt-20 md:mt-15 mt-10 p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-950 mx-4 md:mx-auto rounded-lg shadow-xl dark:shadow-white/25">
+      <h2 className="text-2xl sm:text-3xl text-center font-bold mb-4 text-gray-800 dark:text-gray-100">
         {currentLesson.title}
       </h2>
 
-      <p className="text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed whitespace-pre-line">
+      <p className="text-gray-700 text-center dark:text-gray-300 text-base sm:text-lg leading-relaxed whitespace-pre-line">
         {summary ? summary : currentLesson.text}
       </p>
 
@@ -86,7 +86,7 @@ const LessonViewer = ({ lessons, id }) => {
         <button
           onClick={prevLesson}
           disabled={currentIndex === 0}
-          className="bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 sm:px-6 py-2 rounded disabled:opacity-50 hover:bg-gray-400 dark:hover:bg-gray-500 transition"
+          className="btn btn-outline hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black px-4 sm:px-6 py-2 rounded disabled:opacity-50  transition"
         >
           Previous
         </button>
@@ -98,7 +98,7 @@ const LessonViewer = ({ lessons, id }) => {
         <button
           onClick={nextLesson}
           disabled={completed}
-          className="bg-blue-500 text-white px-4 sm:px-6 py-2 rounded disabled:opacity-50 hover:bg-blue-600 transition"
+          className="btn btn-outline px-4 sm:px-6 py-2 rounded disabled:opacity-50 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
         >
           Next
         </button>
@@ -107,7 +107,7 @@ const LessonViewer = ({ lessons, id }) => {
       <button
         onClick={handleSummarize}
         disabled={loading}
-        className="mt-4 w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+        className="mt-4 w-full btn btn-dash px-4 py-2 rounded hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
       >
         {loading ? "Summarizing..." : "Summarize"}
       </button>

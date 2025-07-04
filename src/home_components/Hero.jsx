@@ -4,7 +4,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section className=" text-black">
-      <div className="container mx-auto px-4 py-20 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-4 lg:py-15 md:py-15 py-10 flex flex-col md:flex-row items-center justify-between">
         {/* Left Content */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <span className="inline-block bg-black dark:text-black text-white dark:bg-white   font-semibold px-3 py-1 rounded-full text-sm">
@@ -19,12 +19,12 @@ const Hero = () => {
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
             <Link href={"/auth/login"}>
-              <button className="bg-black dark:bg-transparent dark:border text-white px-6 py-3 rounded-full font-semibold dark:hover:text-black dark:hover:bg-white transition">
+              <button className="bg-black dark:bg-transparent dark:border text-white w-[180px] py-3 rounded-full font-semibold dark:hover:text-black dark:hover:bg-white transition">
                 Get Started
               </button>
             </Link>
             <Link href={'/courses'}>
-              <button className="border dark:border-white px-6 py-3 rounded-full font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black dark:text-white hover:text-white transition">
+              <button className="border dark:border-white w-[180px] py-3 rounded-full font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black dark:text-white hover:text-white transition">
                 Browse Courses
               </button>
             </Link>

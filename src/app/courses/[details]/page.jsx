@@ -30,7 +30,7 @@ const page = async ({ params }) => {
         max-w-4xl p-6 
       bg-white dark:bg-transparent
       rounded-lg 
-      shadow-md dark:shadow-[0_4px_6px_-1px_rgba(255,255,255,0.3),0_2px_4px_-1px_rgba(255,255,255,0.06)]
+      shadow-xl dark:shadow-white/15 
       border border-gray-200 dark:border-white
 
       mx-4
