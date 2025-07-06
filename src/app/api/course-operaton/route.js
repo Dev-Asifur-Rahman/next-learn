@@ -3,6 +3,8 @@ import { getToken } from "next-auth/jwt";
 
 const { NextResponse } = require("next/server");
 
+
+// send enrolled courses 
 export async function POST(req) {
   const students = await mongoDb(collections.student);
   const token = await getToken({ req });
