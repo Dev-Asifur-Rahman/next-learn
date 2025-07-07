@@ -5,7 +5,7 @@ const useShowUsers = (role) => {
   const [userCount, setUserCount] = useState(null);
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/api/admin/users?role=${role}`);
+      const res = await axios.get(`/api/admin/users?role=${role}&data=${false}`);
       setUserCount(res.data.count);
     };
     fetchUser();

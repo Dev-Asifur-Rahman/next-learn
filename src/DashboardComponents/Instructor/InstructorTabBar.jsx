@@ -10,7 +10,7 @@ const InstructorTabBar = () => {
      return (
        <div className="min-h-screen flex flex-col justify-between">
          {/* Main Content Area */}
-         <main className="p-4">
+         <main className="p-4 mb-[40px]">
            {activeTab === "analytics" && (
              <InstructorAnalytics></InstructorAnalytics>
            )}
@@ -23,11 +23,11 @@ const InstructorTabBar = () => {
          </main>
    
          {/* Bottom Tab Bar */}
-         <nav className="fixed bottom-0 left-0 w-full bg-base-200 border-t border-base-300 flex justify-around items-center py-2 z-50 shadow-md">
+         <nav className="fixed bottom-0 left-0 w-full bg-base-200 border-t border-base-300 flex h-[40px] justify-around items-center py-2 z-50 shadow-md">
            <button
              onClick={() => setActiveTab("analytics")}
              className={`flex flex-col items-center text-sm ${
-               activeTab === "dashboard"
+               activeTab === "analytics"
                  ? " font-bold"
                  : "text-base-content"
              }`}

@@ -1,6 +1,9 @@
-import React from "react";
+import useShowUsersData from "@/hooks/useShowUsersData";
+import { TfiTrash } from "react-icons/tfi";
+import { RxCross1 } from "react-icons/rx";
 
 const AllStudents = () => {
+  const students = useShowUsersData("student").user;
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">
@@ -9,32 +12,25 @@ const AllStudents = () => {
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Email</th>
+            <th>userId</th>
+            <th>role</th>
+            <th><TfiTrash /></th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          {students?.map((student, index) => {
+            return (
+              <tr key={index}>
+                <th>{index+1}</th>
+                <td>{student.name}</td>
+                <td>{student.email}</td>
+                <td>{student.userId}</td>
+                <td>{student.role}</td>
+                <td><RxCross1 /></td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
