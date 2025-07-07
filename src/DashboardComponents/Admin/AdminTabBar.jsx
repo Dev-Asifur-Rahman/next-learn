@@ -11,6 +11,20 @@ const AdminTabBar = () => {
   const [activeTab, setActiveTab] = useState("analytics");
   const [dropdown, setDropdown] = useState(false);
   const all_roles = ["admin", "instructor", "student"];
+
+  const userFunction = () => {
+    if (
+      activeTab !== "users-admin" &&
+      activeTab !== "users-instructor" &&
+      activeTab !== "users-student"
+    ) {
+      setActiveTab("users-admin");
+      return;
+    } else {
+      setDropdown(!dropdown)
+      return
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col justify-between">
       {/* Main Content Area */}
@@ -38,10 +52,7 @@ const AdminTabBar = () => {
         </button>
         <div className="relative">
           <button
-            onClick={() => {
-              setActiveTab("users-admin");
-              setDropdown(!dropdown);
-            }}
+            onClick={userFunction}
             className={`flex flex-col items-center bg-transparent shadow-none hover:bg-transparent  ${
               activeTab === "users-admin" ||
               activeTab === "users-student" ||
@@ -58,7 +69,7 @@ const AdminTabBar = () => {
                 return (
                   <li
                     onClick={() => {
-                      setActiveTab(`users-${role}`)
+                      setActiveTab(`users-${role}`);
                       setDropdown(!dropdown);
                     }}
                     key={index}
