@@ -1,6 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { TfiTrash } from "react-icons/tfi";
+import { RxCross1 } from "react-icons/rx";
 
 const AllCoursesAdmin = () => {
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const res = await axios.get(`/api/total-courses?data=${true}`);
+      setCourses(res.data.courses);
+    };
+    fetchCourses();
+  }, []);
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">
@@ -9,32 +20,29 @@ const AllCoursesAdmin = () => {
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>CourseId</th>
+            <th>Instructor</th>
+            <th>Enrolled</th>
+            <th>
+              <TfiTrash />
+            </th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          {courses?.map((course, index) => {
+            return (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td>{course.title}</td>
+                <td>{course.courseId}</td>
+                <td>{course.instructor.name}</td>
+                <td>{course.enrolledId.length}</td>
+                <td>
+                  <RxCross1 />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

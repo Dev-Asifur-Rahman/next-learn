@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
+// enroll in a course 
 export async function POST(req) {
   const token = await getToken({ req });
   if (!token) {

@@ -13,7 +13,7 @@ const AdminAnalytics = () => {
 
   useEffect(() => {
     const countCourses = async () => {
-      const res = await axios.get("/api/total-courses");
+      const res = await axios.get(`/api/total-courses?data=${false}`);
       setCountCourses(res.data.count);
     };
     countCourses();
