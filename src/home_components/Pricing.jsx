@@ -66,7 +66,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12">
+    <section id="plan-section" className="max-w-7xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-extrabold text-center mb-10">
         Choose Your Plan
       </h1>

@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextLearn
 
-## Getting Started
+**Live Site**: https://project-next-learn.vercel.app
 
-First, run the development server:
+NextLearn is an AI-powered learning platform that helps students, instructors, and admins interact seamlessly while leveraging AI for quizzes, study planning, and summarization.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 👤 Developer
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Name**: Asifur Rahman
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔐 Demo Login
 
-To learn more about Next.js, take a look at the following resources:
+- **Student Account**:  
+  - **Email**: `maruf@gmail.com`
+  - **Password**: `Maruf1234`  
+- **Instructor Account**:  
+  - **Email**: `instructor@example.com`  
+  - **Password**: `1234Next`  
+- **Admin Account**:  
+  - **Email**: `asifurrahman.ac@gmail.com`  
+  - **Password**: `Asif1234`  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Key Features
 
-## Deploy on Vercel
+- 👩‍🎓 **Role-Based Dashboards** for Students, Instructors, and Admins  
+- **AI-Powered Quiz Generation** from study materials  
+- **Study Planner** to schedule and track learning progress  
+- **Content Summarization** from enrolled courses  
+- **User Authentication** with OAuth (email/password-based) and google    
+- Admin dashboard to monitor users, courses, and analytics  
+- **Responsive Design** with Tailwind CSS and DaisyUI  
+- **Animations & Engagement** using Lottie and Swiper  
+- **Real-Time Data Fetching** for smooth interactions  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠 Tech Stack
+
+### Frontend
+
+- **React.js** & **Next.js**  
+- **Tailwind CSS** & **DaisyUI** for UI components  
+- **React Router 7** for client-side routing  
+- **Axios** for API requests  
+- **React Query** for efficient data fetching  
+- **Swiper** & **Lottie React** for interactive animations  
+- **Lucide Icons** & **React Icons**  
+
+### Backend & AI
+ 
+- **MongoDB** for database  
+- **OAuth**  
+- **Hugging Face NLP Models and DeepSeek** for quiz generation & summarization  
+
+### Hosting
+
+- **Vercel**
+
+
+
+
+

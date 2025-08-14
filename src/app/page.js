@@ -9,7 +9,7 @@ import Testimonials from "@/home_components/Testimonials";
 export default function Home() {
   return (
     <>
-      <section className="w-full">
+      <section className="w-full scroll-smooth">
         <Hero></Hero>
         <HowItWorks></HowItWorks>
         <Pricing></Pricing>

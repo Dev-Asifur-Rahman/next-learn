@@ -1,3 +1,4 @@
+import NavigatePlanSection from "@/components/NavigatePlanSection";
 import Image from "next/image";
 import Link from "next/link";
 // import banner from "/public/images/next-learn-banner-two.png"
@@ -19,13 +20,10 @@ const Hero = () => {
             dashboards for students, instructors, and admins.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-            <Link href={"/auth/login"}>
-              <button className="bg-black dark:bg-transparent dark:border text-white w-[180px] py-3 rounded-full font-semibold dark:hover:text-black dark:hover:bg-white transition">
-                Get Started
-              </button>
-            </Link>
-            <Link href={'/courses'}>
-              <button className="border dark:border-white w-[180px] py-3 rounded-full font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black dark:text-white hover:text-white transition">
+            <NavigatePlanSection></NavigatePlanSection>
+
+            <Link href={"/courses"}>
+              <button className="border cursor-pointer dark:border-white w-[180px] py-3 rounded-full font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black dark:text-white hover:text-white transition">
                 Browse Courses
               </button>
             </Link>
@@ -35,7 +33,7 @@ const Hero = () => {
         {/* Right Image */}
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[400px] mt-10 md:mt-0">
           <Image
-            src='/images/next-learn-banner-two.png'
+            src="/images/next-learn-banner-two.png"
             alt="Hero Illustration"
             fill
             className="object-cover rounded-md"
