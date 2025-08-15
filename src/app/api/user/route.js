@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import mongoDb, { collections } from "@/lib/mongoConnect";
 import { getToken } from "next-auth/jwt";
 
+// get the use based on role
 export async function GET(req) {
   const token = await getToken({ req });
   if (!token) {
@@ -21,7 +22,6 @@ export async function GET(req) {
     admins.findOne({ email }),
   ]);
 
-  // Determine role based on which collection found the user
   let user = student || instructor || admin;
   if (!user) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });

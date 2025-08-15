@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
+// send total completed enrolled courses of a student 
 export async function GET(req) {
   const token = await getToken({ req });
   const email = token.email;

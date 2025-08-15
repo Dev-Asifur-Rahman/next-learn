@@ -1,7 +1,7 @@
 import mongoDb, { collections } from "@/lib/mongoConnect";
 import { NextResponse } from "next/server";
 
-// send conditional courses to admin panel
+// send courses data if data = true else only total data count to admin panel
 export async function GET(req) {
   const queries = req.nextUrl.searchParams;
   const data = queries.get("data") === "true";

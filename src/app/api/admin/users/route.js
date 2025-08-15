@@ -1,7 +1,7 @@
 import mongoDb, { collections } from "@/lib/mongoConnect";
 import { NextResponse } from "next/server";
 
-// send user data and count users on condition
+// send user data and count admin instructor and admin on condition
 export async function GET(req) {
   const queries = req.nextUrl.searchParams;
   const role = queries.get("role");
@@ -11,7 +11,7 @@ export async function GET(req) {
   const instructors = await mongoDb(collections.instructor);
   const admins = await mongoDb(collections.admin);
 
-  // if true send data of student instructors an admin 
+  // if true send data of student instructors and admin 
   if (data === true) {
     if (role === "student") {
       const result = await students.find().toArray();
