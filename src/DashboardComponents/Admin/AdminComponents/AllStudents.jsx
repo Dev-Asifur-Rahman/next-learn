@@ -13,8 +13,8 @@ const AllStudents = () => {
             <th></th>
             <th>Name</th>
             <th>Email</th>
-            <th>userId</th>
-            <th>role</th>
+            <th className="text-center">userId</th>
+            <th className="text-center">role</th>
             <th><TfiTrash /></th>
           </tr>
         </thead>
@@ -25,8 +25,8 @@ const AllStudents = () => {
                 <th>{index+1}</th>
                 <td>{student.name}</td>
                 <td>{student.email}</td>
-                <td>{student.userId}</td>
-                <td>{student.role}</td>
+                <td className="text-center">{student.userId}</td>
+                <td className="text-center">{student.role}</td>
                 <td><RxCross1 /></td>
               </tr>
             );

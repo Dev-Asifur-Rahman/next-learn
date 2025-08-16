@@ -12,8 +12,8 @@ const AllInstructors = () => {
             <th></th>
             <th>Name</th>
             <th>Email</th>
-            <th>userId</th>
-            <th>role</th>
+            <th className="text-center">userId</th>
+            <th className="text-center">role</th>
             <th>
               <TfiTrash />
             </th>
@@ -26,8 +26,8 @@ const AllInstructors = () => {
                 <th>{index + 1}</th>
                 <td>{instructor.name}</td>
                 <td>{instructor.email}</td>
-                <td>{instructor.userId}</td>
-                <td>{instructor.role}</td>
+                <td className="text-center">{instructor.userId}</td>
+                <td className="text-center">{instructor.role}</td>
                 <td>
                   <RxCross1 />
                 </td>

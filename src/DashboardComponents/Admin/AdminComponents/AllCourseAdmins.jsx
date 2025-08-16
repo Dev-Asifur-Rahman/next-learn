@@ -20,9 +20,9 @@ const AllCoursesAdmin = () => {
           <tr>
             <th></th>
             <th>Name</th>
-            <th>CourseId</th>
+            <th className="text-center">CourseId</th>
             <th>Instructor</th>
-            <th>Enrolled</th>
+            <th className="text-center">Enrolled</th>
             <th>
               <TfiTrash />
             </th>
@@ -34,9 +34,9 @@ const AllCoursesAdmin = () => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{course.title}</td>
-                <td>{course.courseId}</td>
+                <td className="text-center">{course.courseId}</td>
                 <td>{course.instructor.name}</td>
-                <td>{course.enrolledId.length}</td>
+                <td className="text-center">{course.enrolledId.length}</td>
                 <td>
                   <RxCross1 />
                 </td>
