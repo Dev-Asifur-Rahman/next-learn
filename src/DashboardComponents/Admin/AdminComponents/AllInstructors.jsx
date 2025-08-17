@@ -4,6 +4,9 @@ import { RxCross1 } from "react-icons/rx";
 
 const AllInstructors = () => {
   const instructors = useShowUsersData("instructor").user;
+  const deleteInstructor = () =>{
+    alert('hello')
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">
@@ -28,7 +31,8 @@ const AllInstructors = () => {
                 <td>{instructor.email}</td>
                 <td className="text-center">{instructor.userId}</td>
                 <td className="text-center">{instructor.role}</td>
-                <td>
+                <td className="cursor-pointer
+                " onClick={deleteInstructor}>
                   <RxCross1 />
                 </td>
               </tr>
