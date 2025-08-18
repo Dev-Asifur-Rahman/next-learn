@@ -2,7 +2,18 @@
 
 "use client";
 
+import { useEffect } from "react";
+
+
 const StudentAnalytics = () => {
+  useEffect(()=>{
+    const fetchAnalytics = async() =>{
+      const response = await fetch('/api/student/analytics')
+      const data = await response.json()
+      console.log(data)
+    }
+    fetchAnalytics()
+  },[])
   // Dummy data for student analytics
   const coursesEnrolled = 3;
   const coursesCompleted = 1;
