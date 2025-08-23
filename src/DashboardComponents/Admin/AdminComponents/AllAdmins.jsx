@@ -6,7 +6,7 @@ const AllAdmins = () => {
   const admins = useShowUsersData("admin").user;
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra">
+      <table className="table table-zebra my-6">
         {/* head */}
         <thead>
           <tr>
@@ -28,7 +28,24 @@ const AllAdmins = () => {
                 <td>{admin.name}</td>
                 <td>{admin.email}</td>
                 <td>{admin.userId}</td>
-                <td>{admin.role}</td>
+                <td>
+                  <div className="dropdown dropdown-top dropdown-center">
+                    <div tabIndex={0} className="m-1 cursor-pointer">
+                      {admin.role}
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu bg-base-100 rounded-box z-10 p-2 shadow-sm"
+                    >
+                      <li>
+                        <a className="text-nowrap">Make Instructor</a>
+                      </li>
+                      <li>
+                        <a className="text-nowrap">Make Student</a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
                 <td>
                   <RxCross1 />
                 </td>
