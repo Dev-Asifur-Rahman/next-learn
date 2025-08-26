@@ -6,17 +6,24 @@ import AllStudents from "./AdminComponents/AllStudents";
 import AllInstructors from "./AdminComponents/AllInstructors";
 import AllCoursesAdmin from "./AdminComponents/AllCourseAdmins";
 import AllAdmins from "./AdminComponents/AllAdmins";
-
+import { icons } from "./../../../public/icons/react-icons";
 
 const AdminSideBar = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
 
-  const tabs = ["Analytics", "Courses", "Admin", "Instructor", "Students", "Profile"];
+  const tabs = [
+    { name: "Analytics", icon: icons.analytics },
+    { name: "Courses", icon: icons.course },
+    { name: "Admin", icon: icons.admins },
+    { name: "Instructor", icon: icons.instructors },
+    { name: "Students", icon: icons.students },
+    { name: "Profile", icon: icons.profile },
+  ];
 
   const components = {
     Analytics: <AdminAnalytics />,
     Admin: <AllAdmins></AllAdmins>,
-    Courses: <AllCoursesAdmin/>,
+    Courses: <AllCoursesAdmin />,
     Instructor: <AllInstructors />,
     Students: <AllStudents />,
     Profile: <Profile />,
@@ -29,9 +36,7 @@ const AdminSideBar = () => {
 
       {/* Main content */}
       <div className="drawer-content flex flex-col">
-        <div className="p-4 w-full">
-          {components[activeTab]}
-        </div>
+        <div className="p-4 w-full">{components[activeTab]}</div>
       </div>
 
       {/* Sidebar drawer */}
@@ -44,16 +49,17 @@ const AdminSideBar = () => {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {tabs.map((tab, index) => (
             <li key={index}>
-              <a
-                onClick={() => setActiveTab(tab)}
+              <div
+                onClick={() => setActiveTab(tab?.name)}
                 className={`${
-                  activeTab === tab
-                    ? "dark:bg-white bg-black text-white dark:text-black font-bold"
+                  activeTab === tab?.name
+                    ? "dark:bg-white bg-black text-white dark:text-black font-bold rounded-sm"
                     : ""
                 }`}
               >
-                {tab}
-              </a>
+                <div>{tab?.icon}</div>
+                <a>{tab?.name}</a>
+              </div>
             </li>
           ))}
         </ul>
