@@ -7,9 +7,8 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
-import React from "react";
 
-const Certificate = () => {
+const page = () => {
   const styles = StyleSheet.create({
     page: {
       backgroundColor: "#E4E4E4",
@@ -17,16 +16,20 @@ const Certificate = () => {
     section: {
       margin: 10,
       padding: 10,
-      border: '2px solid black'
+      border: "2px solid black",
     },
   });
   return (
-    <section className="w-full h-screen flex items-center justify-center overflow-y-scroll">
-      <PDFViewer className=" h-[600px] w-[600px]">
+    <section className="w-full flex items-center justify-center overflow-y-scroll">
+      <PDFViewer className=" h-[1600px] w-[600px]">
         <Document>
-          <Page size="A4" style={styles.page} >
+          <Page size="A4" style={styles.page}>
             <View style={styles.section}>
               <Text>Section #1</Text>
+            </View>
+            <View>
+              <Text>Api Key : bb_pr_23672446f91ddbd3de3ec740d4c531</Text>
+              <Text>Project Web Hook Key : bb_wh_4881a11acc84e6e380aff89ec0e0fd </Text>
             </View>
           </Page>
         </Document>
@@ -35,4 +38,4 @@ const Certificate = () => {
   );
 };
 
-export default Certificate;
+export default page;

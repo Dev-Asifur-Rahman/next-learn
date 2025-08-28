@@ -18,6 +18,7 @@ const NavBar = () => {
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
     { name: "Dashboard", href: `/dashboard/${role}` },
+    { name: "My Certificates", href: "/certificate" },
   ];
 
   const theme_controller = (e) => {
@@ -68,7 +69,7 @@ const NavBar = () => {
             </ul>
           )}
         </div>
-        <Link href={'/'}>
+        <Link href={"/"}>
           <p className="text-3xl font-bold hidden md:inline lg:inline">
             NextLearn
           </p>
