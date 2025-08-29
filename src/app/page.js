@@ -1,4 +1,3 @@
-import Certificate from "@/components/Certificate";
 import FAQ from "@/home_components/FAQ";
 import Hero from "@/home_components/Hero";
 import HowItWorks from "@/home_components/HowItWorks";
@@ -18,7 +17,6 @@ export default function Home() {
         <Testimonials></Testimonials>
         <Newsletter></Newsletter>
         <MapSection></MapSection>
-        <Certificate></Certificate>
       </section>
     </>
   );
