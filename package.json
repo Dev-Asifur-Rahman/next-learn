@@ -12,6 +12,7 @@
     "@bprogress/next": "^3.2.12",
     "@react-pdf/renderer": "^4.3.0",
     "axios": "^1.10.0",
+    "bannerbear": "^1.4.0",
     "bcrypt": "^6.0.0",
     "daisyui": "^5.0.43",
     "dayjs": "^1.11.13",

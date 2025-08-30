@@ -4,13 +4,13 @@ import { NextResponse } from "next/server";
 const middleware = async (req) => {
   const token = await getToken({ req });
   const { pathname } = req.nextUrl;
-  
-  const loginUrl = new URL("/auth/login", req.url);
-  const homeUrl = new URL('/',req.url)
 
-  if(pathname.startsWith('/auth')){
-    if(token){
-      return NextResponse.redirect(homeUrl)
+  const loginUrl = new URL("/auth/login", req.url);
+  const homeUrl = new URL("/", req.url);
+
+  if (pathname.startsWith("/auth")) {
+    if (token) {
+      return NextResponse.redirect(homeUrl);
     }
   }
 
@@ -20,6 +20,14 @@ const middleware = async (req) => {
     }
   }
 
+  if (pathname.startsWith("/certificate")) {
+    if (!token) {
+      return NextResponse.redirect(loginUrl);
+    }
+    if (token.role !== "student") {
+      return NextResponse.redirect(homeUrl);
+    }
+  }
   if (pathname.startsWith("/dashboard")) {
     if (!token) {
       return NextResponse.redirect(loginUrl);

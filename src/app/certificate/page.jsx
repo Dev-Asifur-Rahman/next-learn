@@ -29,7 +29,45 @@ const page = () => {
             </View>
             <View>
               <Text>Api Key : bb_pr_23672446f91ddbd3de3ec740d4c531</Text>
-              <Text>Project Web Hook Key : bb_wh_4881a11acc84e6e380aff89ec0e0fd </Text>
+              <Text>
+                Project Web Hook Key : bb_wh_4881a11acc84e6e380aff89ec0e0fd{" "}
+              </Text>
+            </View>
+            <View>
+              <Text>
+                {JSON.stringify({
+                  template: "BAQGWyDLvaNMZgmENL",
+                  modifications: [
+                    {
+                      name: "signature",
+                      text: "Asifur Rahman",
+                      color: null,
+                      background: null,
+                    },
+                    {
+                      name: "date",
+                      text: "30/8/2025",
+                      color: null,
+                      background: null,
+                    },
+                    {
+                      name: "subtitle",
+                      text: "Hello its completing the course x",
+                      color: null,
+                      background: null,
+                    },
+                    {
+                      name: "name",
+                      text: "KARIM",
+                      color: null,
+                      background: null,
+                    },
+                  ],
+                  webhook_url: null,
+                  transparent: false,
+                  metadata: null,
+                })}
+              </Text>
             </View>
           </Page>
         </Document>
