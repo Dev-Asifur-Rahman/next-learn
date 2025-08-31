@@ -5,17 +5,15 @@ import { PiStudentBold } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { MdDashboardCustomize } from "react-icons/md";
 import { SiCoursera } from "react-icons/si";
-
-
+import { RiHome6Line } from "react-icons/ri";
 
 export const icons = {
-    analytics : <IoIosAnalytics />,
-    admins : <RiAdminFill />,
-    instructors : <FaChalkboardTeacher />,
-    students : <PiStudentBold />,
-    profile : <CgProfile />,
-    dashboard : <MdDashboardCustomize />,
-    course : <SiCoursera />
-}
-
-
+  home: <RiHome6Line />,
+  analytics: <IoIosAnalytics />,
+  admins: <RiAdminFill />,
+  instructors: <FaChalkboardTeacher />,
+  students: <PiStudentBold />,
+  profile: <CgProfile />,
+  dashboard: <MdDashboardCustomize />,
+  course: <SiCoursera />,
+};
