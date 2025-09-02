@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 lg:py-15 md:py-15 py-10 flex flex-col md:flex-row items-center justify-between">
         {/* Left Content */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
-          <span className="inline-block bg-black dark:text-black text-white dark:bg-white   font-semibold px-3 py-1 rounded-full text-sm">
+          <span className="inline-block bg-black dark:text-black text-white dark:bg-white   font-semibold px-3 py-1 rounded-full text-sm border">
             🌟 New AI Learning Platform
           </span>
           <h1 className="text-4xl md:text-5xl text-black dark:text-white font-bold">
@@ -19,7 +19,7 @@ const Hero = () => {
             Access AI-generated quizzes, smart study planners, and personalized
             dashboards for students, instructors, and admins.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
             <NavigatePlanSection></NavigatePlanSection>
 
             <Link href={"/courses"}>
