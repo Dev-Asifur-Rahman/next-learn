@@ -6,7 +6,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section className=" text-black">
-      <div className="container mx-auto px-4 lg:py-15 md:py-15 py-10 flex flex-col md:flex-row items-center justify-between">
+      <div className="container mx-auto px-4 lg:py-15 md:py-15 py-10 flex flex-col md:flex-row lg:flex-row items-center">
         {/* Left Content */}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <span className="inline-block bg-black dark:text-black text-white dark:bg-white   font-semibold px-3 py-1 rounded-full text-sm border">
@@ -19,9 +19,8 @@ const Hero = () => {
             Access AI-generated quizzes, smart study planners, and personalized
             dashboards for students, instructors, and admins.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start items-center">
+          <div className="flex flex-col md:flex-row lg:flex-row justify-center md:justify-evenly lg:justify-start items-center gap-3 md:gap-2 md:mx-2">
             <NavigatePlanSection></NavigatePlanSection>
-
             <Link href={"/courses"}>
               <button className="border cursor-pointer dark:border-white w-[180px] py-3 rounded-full font-semibold hover:bg-black dark:hover:bg-white dark:hover:text-black dark:text-white hover:text-white transition">
                 Browse Courses
