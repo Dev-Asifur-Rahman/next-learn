@@ -10,7 +10,7 @@ const FAQ = () => {
       </h2>
       <section className="flex flex-col-reverse md:flex-row lg:flex-row justify-between items-center w-full">
         <div className="space-y-4 lg:w-1/2 md:w-1/2 w-full">
-          <div className="collapse bg-base-100 border border-base-300">
+          <div className="collapse bg-base-100 border border-base-300 dark:border-white">
             <input type="radio" name="faq-accordion" defaultChecked />
             <div className="collapse-title font-semibold">
               What is NextLearn?
@@ -24,7 +24,7 @@ const FAQ = () => {
             </div>
           </div>
 
-          <div className="collapse bg-base-100 border border-base-300">
+          <div className="collapse bg-base-100 border border-base-300 dark:border-white">
             <input type="radio" name="faq-accordion" />
             <div className="collapse-title font-semibold">
               How does AI generate quizzes on NextLearn?
@@ -38,7 +38,7 @@ const FAQ = () => {
             </div>
           </div>
 
-          <div className="collapse bg-base-100 border border-base-300">
+          <div className="collapse bg-base-100 border border-base-300 dark:border-white">
             <input type="radio" name="faq-accordion" />
             <div className="collapse-title font-semibold">
               Is NextLearn free to use?
@@ -52,7 +52,7 @@ const FAQ = () => {
             </div>
           </div>
 
-          <div className="collapse bg-base-100 border border-base-300">
+          <div className="collapse bg-base-100 border border-base-300 dark:border-white">
             <input type="radio" name="faq-accordion" />
             <div className="collapse-title font-semibold">
               How can I become an instructor on NextLearn?
