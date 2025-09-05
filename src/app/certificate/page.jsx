@@ -19,6 +19,9 @@ const page = () => {
       border: "2px solid black",
     },
   });
+  const getCertificate = async() =>{
+    console.log('Hello')
+  }
   return (
     <section className="w-full flex items-center justify-center overflow-y-scroll">
       <PDFViewer className=" h-[1600px] w-[600px]">
@@ -72,6 +75,7 @@ const page = () => {
           </Page>
         </Document>
       </PDFViewer>
+      <button onClick={getCertificate}>Get Api Response</button>
     </section>
   );
 };
