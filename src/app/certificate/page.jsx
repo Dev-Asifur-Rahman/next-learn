@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from "@react-pdf/renderer";
+import axios from "axios";
 
 const page = () => {
   const styles = StyleSheet.create({
@@ -20,7 +21,9 @@ const page = () => {
     },
   });
   const getCertificate = async() =>{
-    console.log('Hello')
+   const response = await axios.get('/api/student/certificates')
+   const json = response.data
+   console.log(json)
   }
   return (
     <section className="w-full flex items-center justify-center overflow-y-scroll">
