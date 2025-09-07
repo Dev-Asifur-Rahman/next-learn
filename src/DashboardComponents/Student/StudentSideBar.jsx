@@ -1,17 +1,18 @@
-'use client'
+"use client";
 
 import { useState } from "react";
 import Profile from "../Profile";
 import StudentAnalytics from "./StudentComponents/StudentAnalytics";
 import StudentCourses from "./StudentComponents/StudentCourses";
+import { icons } from "public/icons/react-icons";
 
 const StudentSideBar = () => {
   const [activeTab, setActiveTab] = useState("Analytics");
 
   const tabs = [
-    "Analytics",
-    "Courses",
-    "Profile",
+    { name: "Analytics", icon: icons.analytics },
+    { name: "Courses", icon: icons.course },
+    { name: "Profile", icon: icons.profile },
   ];
 
   const components = {
@@ -40,16 +41,17 @@ const StudentSideBar = () => {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {tabs.map((tab, index) => (
             <li key={index}>
-              <a
-                onClick={() => setActiveTab(tab)}
+              <div
+                onClick={() => setActiveTab(tab?.name)}
                 className={`${
-                  activeTab === tab
-                    ? "dark:bg-white bg-black text-white dark:text-black font-bold"
+                  activeTab === tab?.name
+                    ? "dark:bg-white bg-black text-white dark:text-black font-bold rounded-sm"
                     : ""
                 }`}
               >
-                {tab}
-              </a>
+                <div>{tab?.icon}</div>
+                <a>{tab?.name}</a>
+              </div>
             </li>
           ))}
         </ul>
