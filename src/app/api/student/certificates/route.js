@@ -1,9 +1,8 @@
 import { Bannerbear } from "bannerbear";
 const { NextResponse } = require("next/server");
 
-export async function GET() {
+export async function POST(req) {
   const bb = new Bannerbear(process.env.BANNERBEAR_API_KEY);
-  const account = await bb.account();
   const images = await bb.create_image("2j8dyQZWNE9pb7A9Lm", {
     modifications: [
       {
@@ -31,7 +30,7 @@ export async function GET() {
         background: null,
       },
     ],
-    webhook_url: null,
+    webhook_url: `${process.env.NEXTAUTH_URL}/api/student/bannerbear-webhook`,
     transparent: false,
     metadata: null,
   });

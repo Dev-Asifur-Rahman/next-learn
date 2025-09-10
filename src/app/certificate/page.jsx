@@ -21,7 +21,7 @@ const page = () => {
     },
   });
   const getCertificate = async() =>{
-   const response = await axios.get('/api/student/certificates')
+   const response = await axios.post('/api/student/certificates')
    const json = response.data
    console.log(json)
   }
