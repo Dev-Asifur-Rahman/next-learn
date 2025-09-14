@@ -13,7 +13,7 @@ const AllAdmins = () => {
             <th></th>
             <th>Name</th>
             <th>Email</th>
-            <th>userId</th>
+            <th className="text-center">userId</th>
             <th>role</th>
             <th>
               <TfiTrash />
@@ -27,7 +27,7 @@ const AllAdmins = () => {
                 <th>{index + 1}</th>
                 <td>{admin.name}</td>
                 <td>{admin.email}</td>
-                <td>{admin.userId}</td>
+                <td className="text-center">{admin.userId}</td>
                 <td>
                   <div className="dropdown dropdown-top dropdown-center">
                     <div tabIndex={0} className="m-1 cursor-pointer">
