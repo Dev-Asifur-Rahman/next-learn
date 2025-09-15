@@ -20,11 +20,12 @@ const page = () => {
       border: "2px solid black",
     },
   });
-  const getCertificate = async() =>{
-   const response = await axios.post('/api/student/certificates')
-   const json = response.data
-   console.log(json)
-  }
+  const getCertificate = async () => {
+    const response = await axios.post("/api/student/certificates");
+    const json = response.data;
+    console.log(json);
+  };
+
   return (
     <section className="w-full flex items-center justify-center overflow-y-scroll">
       <PDFViewer className=" h-[1600px] w-[600px]">
