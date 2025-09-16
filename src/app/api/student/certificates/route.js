@@ -11,7 +11,7 @@ export async function POST(req) {
       { name: "subtitle", text: "Certificate Subtitle" },
       { name: "name", text: "John Doe" },
     ],
-    webhook_url: `${process.env.NEXTAUTH_URL}/api/student/bannerbear-webhook`,
+    webhook_url: `${process.env.WEBHOOK_URL}/api/student/bannerbear-webhook`,
     transparent: false,
   });
 
