@@ -13,18 +13,15 @@ export async function POST(req) {
     // Get final image
     const finalImage = await bb.get_image(uid);
 
-    if (finalImage.status === "completed") {
-      console.log("🎉 Final Image Ready!");
-      console.log("UID:", uid);
-      console.log("Image URL:", finalImage.image_url);
-      console.log("Full Object:", finalImage);
+    if (finalImage?.status === "completed") {
+     
+      console.log(finalImage);
     } else {
       console.log("Image not ready yet:", uid);
     }
 
     return NextResponse.json({ received: true });
   } catch (err) {
-    console.error(err);
     return NextResponse.json({ success: false, error: err.message });
   }
 }
