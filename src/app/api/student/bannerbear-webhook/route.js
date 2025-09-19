@@ -1,4 +1,5 @@
 
+import { pusher } from "@/lib/pusher";
 import { Bannerbear } from "bannerbear";
 import { NextResponse } from "next/server";
 
@@ -8,14 +9,15 @@ export async function POST(req) {
     const bb = new Bannerbear(process.env.BANNERBEAR_API_KEY);
 
     const uid = data.uid;
-    console.log(uid,data?.status)
 
-    // Get final image
     const finalImage = await bb.get_image(uid);
 
     if (finalImage?.status === "completed") {
-     
-      console.log(finalImage);
+      console.log(finalImage)
+      await pusher.trigger("certificate",'certificate-ready',{
+        success: true,
+        finalImage
+      })
     } else {
       console.log("Image not ready yet:", uid);
     }
