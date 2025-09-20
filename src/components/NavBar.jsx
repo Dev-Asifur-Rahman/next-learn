@@ -18,7 +18,6 @@ const NavBar = () => {
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
     { name: "Dashboard", href: `/dashboard/${role}` },
-    { name: "My Certificates", href: "/certificate" },
   ];
 
   const theme_controller = (e) => {
@@ -66,6 +65,11 @@ const NavBar = () => {
                   <Link href={route?.href}>{route?.name}</Link>
                 </li>
               ))}
+              {session?.data?.user?.role === "student" && (
+                <li>
+                  <Link href={"/certificate"}>My Certificates</Link>
+                </li>
+              )}
             </ul>
           )}
         </div>
@@ -82,6 +86,11 @@ const NavBar = () => {
               <Link href={route?.href}>{route?.name}</Link>
             </li>
           ))}
+          {session?.data?.user?.role === "student" && (
+            <li>
+              <Link href={"/certificate"}>My Certificates</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
