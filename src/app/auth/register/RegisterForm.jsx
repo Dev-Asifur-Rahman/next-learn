@@ -28,6 +28,7 @@ const RegisterForm = () => {
         location,
         profileImage,
         enrolledCourses: [],
+        certificates:[]
       };
       const student_data = await registerUser(user);
       if (student_data?.success) {

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const EnrolledCoursesCard = ({ course }) => {
+const QuizEnrolledCoursesCard = ({ course }) => {
   const { title, courseImage, _id } = course;
   return (
     <section className="w-full flex justify-center">
@@ -40,4 +40,4 @@ const EnrolledCoursesCard = ({ course }) => {
   );
 };
 
-export default EnrolledCoursesCard;
+export default QuizEnrolledCoursesCard;
