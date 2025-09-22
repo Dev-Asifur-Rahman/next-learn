@@ -1,8 +1,12 @@
 import useShowUsersData from "@/hooks/useShowUsersData";
 import { TfiTrash } from "react-icons/tfi";
 import { RxCross1 } from "react-icons/rx";
+import usePromotionRole from './../../../hooks/usePromotionRole';
 
 const AllAdmins = () => {
+  const promote = async (requestedRole) => {
+     usePromotionRole('admin',requestedRole)
+  };
   const admins = useShowUsersData("admin").user;
   return (
     <div className="overflow-x-auto">
@@ -37,16 +41,24 @@ const AllAdmins = () => {
                       tabIndex={0}
                       className="dropdown-content menu bg-base-100 rounded-box z-10 p-2 shadow-sm"
                     >
-                      <li>
+                      <li
+                        onClick={() => {
+                          promote("instructor");
+                        }}
+                      >
                         <a className="text-nowrap">Make Instructor</a>
                       </li>
-                      <li>
+                      <li
+                        onClick={() => {
+                          promote("student");
+                        }}
+                      >
                         <a className="text-nowrap">Make Student</a>
                       </li>
                     </ul>
                   </div>
                 </td>
-                <td>
+                <td className="cursor-pointer">
                   <RxCross1 />
                 </td>
               </tr>

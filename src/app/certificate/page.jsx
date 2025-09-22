@@ -29,6 +29,7 @@ const page = () => {
     }
   };
 
+
   return (
     <section className="w-full">
       <h2 className="text-xl font-semibold mt-6 mb-4">Completed Courses</h2>
