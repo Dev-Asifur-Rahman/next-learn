@@ -4,8 +4,8 @@ import { RxCross1 } from "react-icons/rx";
 import usePromotionRole from './../../../hooks/usePromotionRole';
 
 const AllAdmins = () => {
-  const promote = async (requestedRole) => {
-     usePromotionRole('admin',requestedRole)
+  const promote = async (id,requestedRole) => {
+     usePromotionRole('admin',requestedRole,id)
   };
   const admins = useShowUsersData("admin").user;
   return (
@@ -43,14 +43,14 @@ const AllAdmins = () => {
                     >
                       <li
                         onClick={() => {
-                          promote("instructor");
+                          promote(admin.userId,"instructor");
                         }}
                       >
                         <a className="text-nowrap">Make Instructor</a>
                       </li>
                       <li
                         onClick={() => {
-                          promote("student");
+                          promote(admin.userId,"student");
                         }}
                       >
                         <a className="text-nowrap">Make Student</a>

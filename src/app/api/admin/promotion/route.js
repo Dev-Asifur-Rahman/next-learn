@@ -12,7 +12,7 @@ export async function POST(req) {
   const admins = await mongoDb(collections.admin);
 
   const checkRole = await serverSession.user.role;
-  console.log(checkRole)
+
   // all codes will be under this condition
   if (checkRole === "admin") {
     const queries = req.nextUrl.searchParams;
@@ -20,16 +20,27 @@ export async function POST(req) {
     // get the role from query
     const role = queries.get("role");
 
-    // get Requested role from queries 
+    // get Requested role from queries
     const requestedRole = queries.get("request");
-    console.log(role,requestedRole)
+
+    const id = queries.get("userId");
+
     if (role === "student") {
+      const getStudent = await students.findOne({ userId: id });
+      console.log(id);
     } else if (role === "instructor") {
+      const getInstructor = await instructors.findOne({ userId: id });
+      console.log(id);
     } else if (role === "admin") {
+      const getAdmin = await admins.findOne({ userId: id });
+      const countStudents = await students.countDocuments()
+      const countInstructor = await instructors.countDocuments()
+      const countAdmin = await  admins.countDocuments()
+      console.log(getAdmin,countAdmin,countInstructor,countInstructor)
+      console.log(id);
     }
-  }
-  else{
-    return NextResponse.json({success : false})
+  } else {
+    return NextResponse.json({ success: false });
   }
 
   return NextResponse.json({ success: true });
