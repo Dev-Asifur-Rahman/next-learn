@@ -3,6 +3,25 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
+const findLastUserId = async (prefix) => {};
+
+const roleSet = async (name, role) => {
+  const collection = await mongoDb(collections.name);
+
+  if (role === "student") {
+    const lastIdNumber = await findLastUserId("s");
+    console.log(lastIdNumber);
+  } else if (role === "instructor") {
+    const lastIdNumber = await findLastUserId("i");
+    console.log(lastIdNumber);
+  } else if (role === "admin") {
+    const lastIdNumber = await findLastUserId("a");
+    console.log(lastIdNumber);
+  } else {
+    return { success: false };
+  }
+};
+
 // promotion user instructor or admin
 export async function POST(req) {
   const serverSession = await getServerSession(authOptions);
@@ -33,11 +52,6 @@ export async function POST(req) {
       console.log(id);
     } else if (role === "admin") {
       const getAdmin = await admins.findOne({ userId: id });
-      const countStudents = await students.countDocuments()
-      const countInstructor = await instructors.countDocuments()
-      const countAdmin = await  admins.countDocuments()
-      console.log(getAdmin,countAdmin,countInstructor,countInstructor)
-      console.log(id);
     }
   } else {
     return NextResponse.json({ success: false });
