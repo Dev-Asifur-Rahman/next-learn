@@ -3,7 +3,21 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-const findLastUserId = async (prefix) => {};
+const findLastUserId = async (prefix,collection) => {
+  const getCollection = await mongoDb(collections.collection)
+  const lastUser = await getCollection.aggregate([
+  {
+    $addFields: {
+      numericId: { $toInt: { $substr: ["$userId", 1, 10] } }
+    }
+  },
+  { $sort: { numericId: -1 } },
+  { $limit: 1 }
+]).toArray();
+
+console.log(lastUser[0]?.userId);
+
+};
 
 const roleSet = async (name, role) => {
   const collection = await mongoDb(collections.name);
