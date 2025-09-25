@@ -15,7 +15,7 @@ const findLastUserId = async (prefix,collection) => {
   { $limit: 1 }
 ]).toArray();
 
-console.log(lastUser[0]?.userId);
+// console.log(lastUser[0]?.userId);
 
 };
 
