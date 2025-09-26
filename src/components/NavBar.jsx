@@ -6,6 +6,7 @@ import LoginBtn from "./LoginBtn";
 import { Global_Context } from "@/providers/ContextProvider";
 import { useSession } from "next-auth/react";
 import LogoutBtn from "./LogoutBtn";
+import NextLearn from "./NextLearn";
 
 const NavBar = () => {
   const { theme, setTheme } = useContext(Global_Context);
@@ -75,7 +76,7 @@ const NavBar = () => {
         </div>
         <Link href={"/"}>
           <p className="text-3xl font-bold hidden md:inline lg:inline">
-            NextLearn
+            <NextLearn></NextLearn>
           </p>
         </Link>
       </div>
