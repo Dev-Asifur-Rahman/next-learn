@@ -17,17 +17,40 @@ const page = () => {
   }, []);
 
   const getCertificate = async () => {
-    const loading = toast.loading("Waiting for Response");
-    const response = await axios.post("/api/student/certificates");
-    const data = response.data;
-    if (data?.success) {
-      toast.dismiss(loading);
-      return toast.success("Congratulations! You will be Notified Soon");
-    } else {
-      toast.dismiss(loading);
-      return toast.error("Something Went Wrong! Try Again");
-    }
-  };
+  const loading = toast.loading("Waiting for Response");
+
+  try {
+    const response = await axios.post(
+      "/api/student/certificates",
+      // {
+      //   name: "Asifur Rahman",
+      //   course: "MERN Bootcamp",
+      //   date: "27 Sep 2025",
+      //   photo: "https://example.com/asifur.png"
+      // },
+      {
+        responseType: "blob"
+      }
+    );
+
+    // Create a URL for the blob
+    const url = URL.createObjectURL(response.data);
+
+    // Preview image
+    const img = document.createElement("img");
+    img.src = url;
+    img.style.width = "600px";
+    document.body.appendChild(img);
+
+    toast.dismiss(loading);
+    toast.success("Certificate Generated! Preview Below.");
+
+  } catch (error) {
+    console.error(error);
+    toast.dismiss(loading);
+    toast.error("Something Went Wrong! Try Again");
+  }
+};
 
 
   return (

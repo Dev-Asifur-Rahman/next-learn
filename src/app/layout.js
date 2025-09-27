@@ -6,7 +6,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import BProgressLoader from "@/providers/BProgressLoader";
 import ConditionalNav from "@/components/ConditionalNav";
 import Footer from "@/components/Footer";
-import CertificateNotifier from "@/components/CertificateNotifier";
+// import CertificateNotifier from "@/components/CertificateNotifier";
 
 export const metadata = {
   title: {
@@ -25,7 +25,7 @@ export default async function RootLayout({ children }) {
             <BProgressLoader>
               <ConditionalNav></ConditionalNav>
               <section className="w-full">
-                <CertificateNotifier></CertificateNotifier>
+                {/* <CertificateNotifier></CertificateNotifier> */}
                 {/* <p>{JSON.stringify(session)}</p> */}
                 {/* <UserInfo></UserInfo> */}
                 <div>{children}</div>

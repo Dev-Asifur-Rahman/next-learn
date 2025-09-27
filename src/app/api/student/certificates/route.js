@@ -1,23 +1,42 @@
-import { Bannerbear } from "bannerbear";
 import { NextResponse } from "next/server";
+import puppeteer from "puppeteer";
+import path from "path";
 
 export async function POST(req) {
-  const bb = new Bannerbear(process.env.BANNERBEAR_API_KEY);
+  // get the image
+  const certificate_bg = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "certificate.png"
+  );
 
-  const images = await bb.create_image("2j8dyQZWNE9pb7A9Lm", {
-    modifications: [
-      { name: "signature", text: "Your Signature" },
-      { name: "date", text: "2025-09-15" },
-      { name: "subtitle", text: "Certificate Subtitle" },
-      { name: "name", text: "John Doe" },
-    ],
-    webhook_url: `${process.env.WEBHOOK_URL}/api/student/bannerbear-webhook`,
-    transparent: false,
-  });
+  // certificate template
 
-  return NextResponse.json({
-    success: true,
-    uid: images.uid,
-    status: images.status,
+  const html = `
+  <html>
+   <body style='margin:0; padding:0;
+        width:1123px; height:794px;
+        background-image: url('file://${certificate_bg}');
+        background-size: cover;
+        position: relative;
+        font-family: Arial, sans-serif;'>
+
+   </body>
+  </html>
+  `;
+
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: "networkidle0" });
+  const imageBuffer = await page.screenshot({ type: "png", fullPage: true });
+
+  await browser.close();
+
+  return new Response(imageBuffer, {
+    headers: {
+      "Content-Type": "image/png",
+      "Content-Disposition": "inline; filename=certificate.png",
+    },
   });
 }
