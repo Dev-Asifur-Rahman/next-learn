@@ -75,9 +75,9 @@ const NavBar = () => {
           )}
         </div>
         <Link href={"/"}>
-          <p className="text-3xl font-bold hidden md:inline lg:inline">
+          <div className="text-3xl font-bold hidden md:inline lg:inline">
             <NextLearn></NextLearn>
-          </p>
+          </div>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

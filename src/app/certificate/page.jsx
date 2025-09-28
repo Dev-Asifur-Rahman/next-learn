@@ -22,6 +22,7 @@ const page = () => {
   try {
     const response = await axios.post(
       "/api/student/certificates",
+      {},
       // {
       //   name: "Asifur Rahman",
       //   course: "MERN Bootcamp",
@@ -34,13 +35,18 @@ const page = () => {
     );
 
     // Create a URL for the blob
-    const url = URL.createObjectURL(response.data);
+    const imageBlob = response.data
+    const url = URL.createObjectURL(imageBlob);
+
+    console.log(url)
+    window.open(url)
 
     // Preview image
     const img = document.createElement("img");
     img.src = url;
-    img.style.width = "600px";
-    document.body.appendChild(img);
+    const image_div =  document.getElementById('certificate')
+    image_div.innerHTML = ''
+    image_div.appendChild(img);
 
     toast.dismiss(loading);
     toast.success("Certificate Generated! Preview Below.");
@@ -73,6 +79,7 @@ const page = () => {
       <section className="w-full flex items-center justify-center overflow-y-scroll">
         <button onClick={getCertificate}>Request For Certificate</button>
       </section>
+      <div id="certificate" className="w-full border"></div>
     </section>
   );
 };
