@@ -2,8 +2,10 @@
 
 import QuizEnrolledCoursesCard from "@/DashboardComponents/Student/StudentComponents/QuizEnrolledCourseCard";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+// import certificate from '```````````/images/newsletter.png'
 
 const page = () => {
   const [completedCourses, setCompletedCourses] = useState([]);
@@ -17,47 +19,41 @@ const page = () => {
   }, []);
 
   const getCertificate = async () => {
-  const loading = toast.loading("Waiting for Response");
+    const loading = toast.loading("Waiting for Response");
 
-  try {
-    const response = await axios.post(
-      "/api/student/certificates",
-      {},
-      // {
-      //   name: "Asifur Rahman",
-      //   course: "MERN Bootcamp",
-      //   date: "27 Sep 2025",
-      //   photo: "https://example.com/asifur.png"
-      // },
-      {
-        responseType: "blob"
-      }
-    );
+    try {
+      const response = await axios.post(
+        "/api/student/certificates",
+        {
+          name:'Asifur Rahman', courseName:'Html Course', date: '29-09-2025'
+        },
+        {
+          responseType: "blob",
+        }
+      );
 
-    // Create a URL for the blob
-    const imageBlob = response.data
-    const url = URL.createObjectURL(imageBlob);
+      // Create a URL for the blob
+      const imageBlob = response.data;
+      const url = URL.createObjectURL(imageBlob);
 
-    console.log(url)
-    window.open(url)
+      console.log(url);
+      window.open(url);
 
-    // Preview image
-    const img = document.createElement("img");
-    img.src = url;
-    const image_div =  document.getElementById('certificate')
-    image_div.innerHTML = ''
-    image_div.appendChild(img);
+      // Preview image
+      const img = document.createElement("img");
+      img.src = url;
+      const image_div = document.getElementById("certificate");
+      image_div.innerHTML = "";
+      image_div.appendChild(img);
 
-    toast.dismiss(loading);
-    toast.success("Certificate Generated! Preview Below.");
-
-  } catch (error) {
-    console.error(error);
-    toast.dismiss(loading);
-    toast.error("Something Went Wrong! Try Again");
-  }
-};
-
+      toast.dismiss(loading);
+      toast.success("Certificate Generated! Preview Below.");
+    } catch (error) {
+      console.error(error);
+      toast.dismiss(loading);
+      toast.error("Something Went Wrong! Try Again");
+    }
+  };
 
   return (
     <section className="w-full">
