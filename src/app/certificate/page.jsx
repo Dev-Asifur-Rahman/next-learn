@@ -25,7 +25,9 @@ const page = () => {
       const response = await axios.post(
         "/api/student/certificates",
         {
-          name:'Asifur Rahman', courseName:'Html Course', date: '29-09-2025'
+          name: "Asifur Rahman",
+          courseName: "Html Course",
+          date: "29-09-2025",
         },
         {
           responseType: "blob",
@@ -36,8 +38,38 @@ const page = () => {
       const imageBlob = response.data;
       const url = URL.createObjectURL(imageBlob);
 
-      console.log(url);
-      window.open(url);
+      const newTab = window.open();
+      newTab.document.write(`
+<html>
+  <head>
+    <title>Certificate</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f0f0f0; /* optional background */
+      }
+      img {
+        max-width: 100vw; 
+        max-height: 100vh; 
+        width: auto; 
+        height: auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="${url}" />
+  </body>
+</html>
+`);
+      newTab.document.close();
 
       // Preview image
       const img = document.createElement("img");
@@ -75,7 +107,10 @@ const page = () => {
       <section className="w-full flex items-center justify-center overflow-y-scroll">
         <button onClick={getCertificate}>Request For Certificate</button>
       </section>
-      <div id="certificate" className="w-full border"></div>
+      <div
+        id="certificate"
+        className="w-full border flex justify-center items-center"
+      ></div>
     </section>
   );
 };
