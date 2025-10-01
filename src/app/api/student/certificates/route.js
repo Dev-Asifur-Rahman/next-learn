@@ -5,14 +5,6 @@ import path from "path";
 export async function POST(req) {
   const { name, courseName, date } = await req.json();
 
-  // PNG certificate path
-  const certificatePath = path.join(
-    process.cwd(),
-    "public",
-    "images",
-    "certificate.png"
-  );
-
   const fontPath = path.join(process.cwd(), "public", "fonts", "cochin.ttf");
 
   const description = `This certificate is proudly presented for the successful completion of the ${courseName} on NextLearn. The recipient has demonstrated dedication, commitment to learning, and the ability to acquire valuable knowledge and practical skills for personal and professional growth.`;

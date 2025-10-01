@@ -2,10 +2,8 @@
 
 import QuizEnrolledCoursesCard from "@/DashboardComponents/Student/StudentComponents/QuizEnrolledCourseCard";
 import axios from "axios";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// import certificate from '```````````/images/newsletter.png'
 
 const page = () => {
   const [completedCourses, setCompletedCourses] = useState([]);
