@@ -1,15 +1,22 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 import path from "path";
+import mongoDb, { collections } from "@/lib/mongoConnect";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export async function POST(req) {
-  const { name, courseName, date } = await req.json();
+  const { name, courseName, date, email, courseId } = await req.json();
 
   const fontPath = path.join(process.cwd(), "public", "fonts", "cochin.ttf");
 
   const description = `This certificate is proudly presented for the successful completion of the ${courseName} on NextLearn. The recipient has demonstrated dedication, commitment to learning, and the ability to acquire valuable knowledge and practical skills for personal and professional growth.`;
 
-  // PNG dimensions
+  // dimensions
   const width = 3717;
   const height = 2625;
 
@@ -63,7 +70,7 @@ export async function POST(req) {
           bottom: 13%;
           left: 19%;
           font-size : 75px;
-          font-weight : 500
+          font-weight : 500 ;
           transform: translateX(-50%);
         }
         .signature {
@@ -99,24 +106,57 @@ export async function POST(req) {
   await page.setViewport({ width, height });
   await page.setContent(html, { waitUntil: "networkidle0" });
 
-  // Ensure body background is transparent
   await page.evaluate(() => {
     document.body.style.background = "transparent";
   });
 
   // Screenshot full page with transparent background
-  const imageBuffer = await page.screenshot({
-    type: "png",
-    omitBackground: true,
-    clip: { x: 0, y: 0, width: width, height: height },
+  // const imageBuffer = await page.screenshot({
+  //   type: "png",
+  //   omitBackground: true,
+  //   clip: { x: 0, y: 0, width: width, height: height },
+  // });
+
+  const pdfBuffer = await page.pdf({
+    printBackground: true,
+    width: `${width}px`,
+    height: `${height}px`,
   });
 
   await browser.close();
+  
+  const students = await mongoDb(collections.student)
 
-  return new NextResponse(imageBuffer, {
-    headers: {
-      "Content-Type": "image/png",
-      "Content-Disposition": "inline; filename=certificate.png",
+  const result = await students.updateOne(
+    { email: email },
+    {
+      $push: {
+        certificates: {
+          courseId : courseId,
+          certificate: pdfBuffer,
+          createdAt: dayjs().tz('Asia/Dhaka').format()
+        },
+      },
     },
-  });
+    { upsert: false }
+  );
+  if(result.matchedCount === 1){
+    return NextResponse.json({success : true})
+  }
+  else{
+    return NextResponse.json({success:false})
+  }
+  
 }
+
+// use this if you want to see it in a new tab 
+// uncomment screenshot and uncomment front end page of my certificates
+
+// use application/png for generate png image
+
+// return new NextResponse(imageBuffer, {
+  //   headers: {
+  //     "Content-Type": "application/png",     
+  //     "Content-Disposition": "inline; filename=certificate.pdf",
+  //   },
+  // });
