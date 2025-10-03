@@ -17,7 +17,7 @@ const page = () => {
   }, []);
 
   const getCertificate = async () => {
-    const loading = toast.loading("Waiting for Response");
+    toast.success('Congratulations! You will be notified Soon')
 
     try {
       const response = await axios.post(
@@ -27,60 +27,8 @@ const page = () => {
           courseName: "Html Course",
           date: "29-09-2025",
         },
-        {
-          responseType: "blob",
-        }
       );
-
-      // Create a URL for the blob
-      const imageBlob = response.data;
-      const url = URL.createObjectURL(imageBlob);
-
-      const newTab = window.open();
-      newTab.document.write(`
-<html>
-  <head>
-    <title>Certificate</title>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #f0f0f0; /* optional background */
-      }
-      img {
-        max-width: 100vw; 
-        max-height: 100vh; 
-        width: auto; 
-        height: auto;
-        display: block;
-      }
-    </style>
-  </head>
-  <body>
-    <img src="${url}" />
-  </body>
-</html>
-`);
-      newTab.document.close();
-
-      // Preview image
-      const img = document.createElement("img");
-      img.src = url;
-      const image_div = document.getElementById("certificate");
-      image_div.innerHTML = "";
-      image_div.appendChild(img);
-
-      toast.dismiss(loading);
-      toast.success("Certificate Generated! Preview Below.");
     } catch (error) {
-      console.error(error);
-      toast.dismiss(loading);
       toast.error("Something Went Wrong! Try Again");
     }
   };
@@ -105,10 +53,6 @@ const page = () => {
       <section className="w-full flex items-center justify-center overflow-y-scroll">
         <button onClick={getCertificate}>Request For Certificate</button>
       </section>
-      <div
-        id="certificate"
-        className="w-full border flex justify-center items-center"
-      ></div>
     </section>
   );
 };
