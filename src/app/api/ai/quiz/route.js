@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import OpenAi from "openai";
 
 // Helper to clean question text: remove numbering and markdown
 function cleanQuestion(q) {
@@ -7,6 +8,13 @@ function cleanQuestion(q) {
     .replace(/\*\*/g, "") // Remove markdown bold **
     .trim();
 }
+
+const a4fBaseUrl = "https://api.a4f.co/v1";
+
+const a4fClient = new OpenAi({
+  apiKey: process.env.A4F_API_KEY,
+  baseURL: a4fBaseUrl,
+});
 
 export async function POST(request) {
   try {
@@ -21,44 +29,34 @@ export async function POST(request) {
     // Combine lesson contents into one text
     const combinedText = lessons.map((lesson) => lesson.text).join(" ");
 
-    const prompt = `Please generate exactly 5 distinct quiz questions numbered from 1 to 5 based on the following text.Text:${combinedText}Questions:1.`;
+    const prompt = `
+Please generate exactly 5 distinct quiz questions numbered from 1 to 5 
+based on the following text.
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}`,
-          "HTTP-Referer": `${
-            process.env.NEXTAUTH_URL || "http://localhost:3000"
-          }`,
-          "X-Title": "NextLearn",
-          "Content-Type": "application/json",
+Text:
+${combinedText}
+
+Questions:
+1.
+`;
+
+    const response = await a4fClient.chat.completions.create({
+      model: process.env.A4F_AI_MODEL_NAME,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
         },
-        body: JSON.stringify({
-          model: "deepseek/deepseek-r1:free",
-          messages: [
-            {
-              role: "user",
-              content: prompt,
-            },
-          ],
-          temperature: 0.7,
-          max_tokens: 2048,
-        }),
-      }
-    );
+      ],
+      //  [
+      //   { role: "system", content: "You are a helpful assistant." },
+      //   { role: "user", content: "Explain the concept of API gateways." },
+      // ],
+      temperature: 0.7,
+      max_tokens: 300,
+    });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      return NextResponse.json(
-        { error: errorText || "Model inference failed" },
-        { status: response.status }
-      );
-    }
-
-    const data = await response.json();
-    const generatedText = data.choices?.[0]?.message?.content || "";
+    const generatedText = response?.choices[0].message.content || "";
 
     // Split by line, clean questions, keep lines that end with '?', take up to 5
     const questions = generatedText
@@ -69,7 +67,6 @@ export async function POST(request) {
 
     return NextResponse.json({ questions });
   } catch (error) {
-    
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
