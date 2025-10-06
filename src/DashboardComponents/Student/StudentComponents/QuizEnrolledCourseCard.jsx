@@ -1,21 +1,30 @@
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import toast from "react-hot-toast";
 
 const QuizEnrolledCoursesCard = ({ course }) => {
-  const { title, courseImage, _id } = course;
+  const { title, courseImage, _id, courseId, courseName } = course;
   const pathname = usePathname();
-
+  const session = useSession();
   const getCertificate = async () => {
-    toast.success("Congratulations! You will be notified Soon");
-
     try {
+      toast.success("Congratulations! You will be notified Soon");
       const response = await axios.post("/api/student/certificates", {
-        name: "Asifur Rahman",
-        courseName: "Html Course",
-        date: "29-09-2025",
+        name: session?.data?.user?.name,
+        courseName: courseName,
+        courseId : courseId,
+        email: session?.data?.user?.email,
       });
+      if(response?.data?.success === false){
+        toast.error(response?.data?.message)
+      }
+      else if(response?.data?.success === true){
+        return
+      }
     } catch (error) {
       toast.error("Something Went Wrong! Try Again");
     }
@@ -38,7 +47,10 @@ const QuizEnrolledCoursesCard = ({ course }) => {
           <h2 className=" text-base font-bold w-full truncate">{title}</h2>
           <div className=" w-full">
             {pathname === "/certificate" ? (
-              <button className="btn btn-sm w-full mt-4 bg-white dark:bg-transparent border dark:border-white  dark:text-white text-black " onClick={getCertificate}>
+              <button
+                className="btn btn-sm w-full mt-4 bg-white dark:bg-transparent border dark:border-white  dark:text-white text-black "
+                onClick={getCertificate}
+              >
                 Certificate
               </button>
             ) : (

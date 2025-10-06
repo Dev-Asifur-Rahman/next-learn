@@ -13,7 +13,6 @@ const CertificateNotifier = () => {
     const channel = pusher.subscribe("certificate");
     channel.bind("certificate-ready", (data) => {
       toast.success("Congratulations! You have recieved certificate");
-      console.log(data);
     });
     return () => {
       channel.unbind_all();

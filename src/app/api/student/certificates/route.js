@@ -2,16 +2,16 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 import path from "path";
 import mongoDb, { collections } from "@/lib/mongoConnect";
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { pusher } from "@/lib/pusher";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export async function POST(req) {
-  const { name, courseName, date, email, courseId } = await req.json();
-
+  const { name, courseName, email, courseId } = await req.json();
   const fontPath = path.join(process.cwd(), "public", "fonts", "cochin.ttf");
 
   const description = `This certificate is proudly presented for the successful completion of the ${courseName} on NextLearn. The recipient has demonstrated dedication, commitment to learning, and the ability to acquire valuable knowledge and practical skills for personal and professional growth.`;
@@ -88,7 +88,7 @@ export async function POST(req) {
         <img src="http://localhost:3000/images/certificate.png" class="certificate-bg" />
         <p class="name">${name}</p>
         <p class="description">${description}</p>
-        <p class="date">${date}</p>
+        <p class="date">${dayjs().tz("Asia/Dhaka").format()}</p>
         <p class="signature">Asif</p>
       </div>
     </body>
@@ -124,39 +124,48 @@ export async function POST(req) {
   });
 
   await browser.close();
-  
-  const students = await mongoDb(collections.student)
 
-  const result = await students.updateOne(
-    { email: email },
-    {
-      $push: {
-        certificates: {
-          courseId : courseId,
-          certificate: pdfBuffer,
-          createdAt: dayjs().tz('Asia/Dhaka').format()
+  const students = await mongoDb(collections.student);
+
+  const student = await students.findOne({ email: email });
+
+
+  const alreadyHasCertificate = student.certificates.some(
+    (c) => c.courseId === courseId
+  );
+//  check already certificate is generated 
+  if (!alreadyHasCertificate) {
+    const result = await students.updateOne(
+      { email: email },
+      {
+        $push: {
+          certificates: {
+            courseId: courseId,
+            certificate: pdfBuffer,
+            createdAt: dayjs().tz("Asia/Dhaka").format(),
+          },
         },
       },
-    },
-    { upsert: false }
-  );
-  if(result.matchedCount === 1){
-    return NextResponse.json({success : true})
+      { upsert: false }
+    );
+    if (result.matchedCount === 1) {
+      await pusher.trigger("certificate", "certificate-ready", {});
+      return NextResponse.json({success : true})
+    }
   }
   else{
-    return NextResponse.json({success:false})
+    return NextResponse.json({success : false,message : 'Certificate is Already Generated'})
   }
-  
 }
 
-// use this if you want to see it in a new tab 
+// use this if you want to see it in a new tab
 // uncomment screenshot and uncomment front end page of my certificates
 
 // use application/png for generate png image
 
 // return new NextResponse(imageBuffer, {
-  //   headers: {
-  //     "Content-Type": "application/png",     
-  //     "Content-Disposition": "inline; filename=certificate.pdf",
-  //   },
-  // });
+//   headers: {
+//     "Content-Type": "application/png",
+//     "Content-Disposition": "inline; filename=certificate.pdf",
+//   },
+// });

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import EnrolledCoursesCard from "./EnrolledCoursesCard";
 import QuizEnrolledCourseCard from "./QuizEnrolledCourseCard";
 import Link from "next/link";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const StudentCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -26,7 +27,7 @@ const StudentCourses = () => {
     fetchCompletedCourses();
     fetchCourses();
   }, []);
-  if (loading && loadingSecond) return <p className="w-full text-center">Loading...</p>;
+  if (loading && loadingSecond) return <LoadingSpinner></LoadingSpinner>
 
   return (
     <section className="w-full">
