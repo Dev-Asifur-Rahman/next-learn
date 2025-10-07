@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ const Profile = () => {
   },[])
 
   if (loading) {
-    return <div className="text-center w-full py-10">Loading...</div>;
+    return <div className="w-full flex justify-center"><LoadingSpinner></LoadingSpinner></div>;
   }
 
   if (!user) {

@@ -1,12 +1,17 @@
 import useShowUsersData from "@/hooks/useShowUsersData";
 import { TfiTrash } from "react-icons/tfi";
 import { RxCross1 } from "react-icons/rx";
+import usePromotionRole from "@/hooks/usePromotionRole";
 
 const AllInstructors = () => {
   const instructors = useShowUsersData("instructor").user;
   const deleteInstructor = () => {
     alert("hello");
   };
+
+  const promote = async (id,requestedRole) => {
+       usePromotionRole('instructor',requestedRole,id)
+    };
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">
@@ -40,7 +45,7 @@ const AllInstructors = () => {
                       className="dropdown-content menu bg-base-100 rounded-box z-10 p-2 shadow-sm"
                     >
                       <li>
-                        <a className="text-nowrap">Make Admin</a>
+                        <a className="text-nowrap" onClick={()=>promote(instructor.userId,'admin')}>Make Admin</a>
                       </li>
                     </ul>
                   </div>

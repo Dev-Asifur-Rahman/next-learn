@@ -3,20 +3,32 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-const findLastUserId = async (prefix,collection) => {
-  const getCollection = await mongoDb(collections.collection)
-  const lastUser = await getCollection.aggregate([
-  {
-    $addFields: {
-      numericId: { $toInt: { $substr: ["$userId", 1, 10] } }
-    }
-  },
-  { $sort: { numericId: -1 } },
-  { $limit: 1 }
-]).toArray();
+const findLastUserId = async (prefix, collection) => {
+  const getCollection = await mongoDb(collections[collection]);
+  const lastUser = await getCollection
+    .aggregate([
+      {
+        $match: { userId: { $regex: `^${prefix}` } },
+      },
+      {
+        $addFields: {
+          numericId: { $toInt: { $substr: ["$userId", 1, -1] } },
+        },
+      },
+      {
+        $sort: { numericId: -1 },
+      },
+      {
+        $limit: 1,
+      },
+    ])
+    .toArray();
 
-// console.log(lastUser[0]?.userId);
-
+  const lastNumericId = lastUser[0]?.numericId || 0;
+  const nextNumericId = lastNumericId + 1;
+  const formattedNumber = String(nextNumericId).padStart(3, "0");
+  const newId = `${prefix}${formattedNumber}`;
+  return newId;
 };
 
 const roleSet = async (name, role) => {
@@ -60,16 +72,22 @@ export async function POST(req) {
 
     if (role === "student") {
       const getStudent = await students.findOne({ userId: id });
-      console.log(id);
+      const newId = await findLastUserId("s", "student");
+      console.log(newId);
     } else if (role === "instructor") {
       const getInstructor = await instructors.findOne({ userId: id });
-      console.log(id);
+      const newId = await findLastUserId("i", "instructor");
+      console.log(newId);
     } else if (role === "admin") {
       const getAdmin = await admins.findOne({ userId: id });
+      const newId = await findLastUserId("a", "admin");
+      console.log(newId);
     }
   } else {
-    return NextResponse.json({ success: false });
+    return NextResponse.json({
+      success: false,
+      message: "Verify Your Identity First",
+    });
   }
-
   return NextResponse.json({ success: true });
 }
