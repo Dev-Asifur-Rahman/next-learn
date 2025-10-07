@@ -27,7 +27,12 @@ const StudentCourses = () => {
     fetchCompletedCourses();
     fetchCourses();
   }, []);
-  if (loading && loadingSecond) return <LoadingSpinner></LoadingSpinner>
+  if (loading && loadingSecond)
+    return (
+      <section className="w-full flex justify-center">
+        <LoadingSpinner></LoadingSpinner>
+      </section>
+    );
 
   return (
     <section className="w-full">

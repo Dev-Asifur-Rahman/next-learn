@@ -18,15 +18,15 @@ const page = () => {
     fetchCompletedCourses();
   }, []);
 
-  
-
   return (
     <section className="w-full">
       <h2 className="text-xl font-semibold mt-6 mb-4 ml-6">
         Completed Courses
       </h2>
       {loading ? (
-        <LoadingSpinner></LoadingSpinner>
+        <section className=" w-full text-center flex justify-center items-center ">
+          <LoadingSpinner></LoadingSpinner>
+        </section>
       ) : (
         <section className="w-full">
           {completedCourses.length === 0 ? (

@@ -7,7 +7,6 @@ import { useContext } from "react";
 const LoadingSpinner = () => {
   const { theme } = useContext(Global_Context);
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
       <RotatingLines
         visible={true}
         height="30"
@@ -20,7 +19,6 @@ const LoadingSpinner = () => {
         wrapperClass=""
         strokeColor={theme === "light" ? "black" : "white"}
       />
-    </div>
   );
 };
 

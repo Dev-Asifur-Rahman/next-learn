@@ -39,7 +39,8 @@ const ContextProvider = ({ children }) => {
           <Toaster />
         </div>
       ) : (
-        <LoadingSpinner></LoadingSpinner>
+        <section className="h-screen w-screen flex justify-center items-center"><LoadingSpinner></LoadingSpinner></section>
+        
       )}
     </Global_Context.Provider>
   );
