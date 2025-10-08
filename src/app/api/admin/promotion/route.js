@@ -2,6 +2,7 @@ import mongoDb, { collections } from "@/lib/mongoConnect";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { collections } from "./../../../../lib/mongoConnect";
 
 const findLastUserId = async (prefix, collection) => {
   const getCollection = await mongoDb(collections[collection]);
@@ -31,18 +32,15 @@ const findLastUserId = async (prefix, collection) => {
   return newId;
 };
 
-const roleSet = async (name, role) => {
-  const collection = await mongoDb(collections.name);
+const roleSet = async (currentRole, requestedRole, collection) => {
+  const collection = await mongoDb(collections[collection]);
 
-  if (role === "student") {
-    const lastIdNumber = await findLastUserId("s");
-    console.log(lastIdNumber);
-  } else if (role === "instructor") {
-    const lastIdNumber = await findLastUserId("i");
-    console.log(lastIdNumber);
-  } else if (role === "admin") {
-    const lastIdNumber = await findLastUserId("a");
-    console.log(lastIdNumber);
+  if (currentRole === "student") {
+    const newId = await findLastUserId("s", "student");
+  } else if (currentRole === "instructor") {
+    const newId = await findLastUserId("i", "instructor");
+  } else if (currentRole === "admin") {
+    const newId = await findLastUserId("a", "admin");
   } else {
     return { success: false };
   }
@@ -51,10 +49,6 @@ const roleSet = async (name, role) => {
 // promotion user instructor or admin
 export async function POST(req) {
   const serverSession = await getServerSession(authOptions);
-
-  const students = await mongoDb(collections.student);
-  const instructors = await mongoDb(collections.instructor);
-  const admins = await mongoDb(collections.admin);
 
   const checkRole = await serverSession.user.role;
 
@@ -71,17 +65,9 @@ export async function POST(req) {
     const id = queries.get("userId");
 
     if (role === "student") {
-      const getStudent = await students.findOne({ userId: id });
-      const newId = await findLastUserId("s", "student");
-      console.log(newId);
+      const result = await roleSet();
     } else if (role === "instructor") {
-      const getInstructor = await instructors.findOne({ userId: id });
-      const newId = await findLastUserId("i", "instructor");
-      console.log(newId);
     } else if (role === "admin") {
-      const getAdmin = await admins.findOne({ userId: id });
-      const newId = await findLastUserId("a", "admin");
-      console.log(newId);
     }
   } else {
     return NextResponse.json({
