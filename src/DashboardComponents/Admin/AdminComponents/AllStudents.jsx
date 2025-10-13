@@ -2,11 +2,14 @@ import useShowUsersData from "@/hooks/useShowUsersData";
 import { TfiTrash } from "react-icons/tfi";
 import { RxCross1 } from "react-icons/rx";
 import usePromotionRole from "@/hooks/usePromotionRole";
+import useDeleteUser from "@/hooks/useDeleteUser";
 
 const AllStudents = () => {
   const students = useShowUsersData("student").user;
-  const deleteStudent = () => {
-    alert("delete student");
+  const { DeleteUser } = useDeleteUser();
+  const deleteStudent = async (id, collection) => {
+    const data = { id, collection };
+    const result = await DeleteUser(data)
   };
 
   const promote = async (id, requestedRole) => {
@@ -56,8 +59,16 @@ const AllStudents = () => {
                     </ul>
                   </div>
                 </td>
-                <td className="cursor-pointer" onClick={deleteStudent}>
-                  <RxCross1 />
+                <td
+                  className="cursor-pointer"
+                  onClick={() => deleteStudent(student.userId, "student")}
+                >
+                  <div
+                    className="tooltip tooltip-left"
+                    data-tip="Delete Student"
+                  >
+                    <RxCross1 />
+                  </div>
                 </td>
               </tr>
             );
