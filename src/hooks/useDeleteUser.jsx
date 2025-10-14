@@ -7,8 +7,12 @@ const useDeleteUser = () => {
   const router = useRouter();
   const DeleteUser = async (data) => {
     const { id, collection } = data;
-    console.log(await deleteUser(id, collection));
-    return { success: true };
+    const result = await deleteUser(id, collection);
+    if (result?.success === true) {
+      return { success: true, message: result?.message };
+    } else {
+      return { success: false, message: result?.message };
+    }
   };
   return { DeleteUser };
 };

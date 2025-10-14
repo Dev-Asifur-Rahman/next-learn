@@ -3,6 +3,8 @@ import { TfiTrash } from "react-icons/tfi";
 import { RxCross1 } from "react-icons/rx";
 import usePromotionRole from "@/hooks/usePromotionRole";
 import useDeleteUser from "@/hooks/useDeleteUser";
+import toast from "react-hot-toast";
+
 
 const AllStudents = () => {
   const students = useShowUsersData("student").user;
@@ -10,6 +12,12 @@ const AllStudents = () => {
   const deleteStudent = async (id, collection) => {
     const data = { id, collection };
     const result = await DeleteUser(data)
+    if(result.success === true){
+      toast.success(result?.message)
+    }
+    else{
+      toast.error(result?.message)
+    }
   };
 
   const promote = async (id, requestedRole) => {

@@ -1,13 +1,25 @@
 import useShowUsersData from "@/hooks/useShowUsersData";
 import { TfiTrash } from "react-icons/tfi";
 import { RxCross1 } from "react-icons/rx";
-import usePromotionRole from './../../../hooks/usePromotionRole';
+import usePromotionRole from "./../../../hooks/usePromotionRole";
+import useDeleteUser from "@/hooks/useDeleteUser";
+import toast from "react-hot-toast";
 
 const AllAdmins = () => {
-  const promote = async (id,requestedRole) => {
-     usePromotionRole('admin',requestedRole,id)
+  const promote = async (id, requestedRole) => {
+    usePromotionRole("admin", requestedRole, id);
   };
   const admins = useShowUsersData("admin").user;
+  const { DeleteUser } = useDeleteUser();
+  const deleteAdmin = async (id, collection) => {
+    const data = { id, collection };
+    const result = await DeleteUser(data);
+    if (result.success === true) {
+      toast.success(result?.message);
+    } else {
+      toast.error(result?.message);
+    }
+  };
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra my-6">
@@ -43,14 +55,14 @@ const AllAdmins = () => {
                     >
                       <li
                         onClick={() => {
-                          promote(admin.userId,"instructor");
+                          promote(admin.userId, "instructor");
                         }}
                       >
                         <a className="text-nowrap">Make Instructor</a>
                       </li>
                       <li
                         onClick={() => {
-                          promote(admin.userId,"student");
+                          promote(admin.userId, "student");
                         }}
                       >
                         <a className="text-nowrap">Make Student</a>
@@ -58,8 +70,16 @@ const AllAdmins = () => {
                     </ul>
                   </div>
                 </td>
-                <td className="cursor-pointer">
-                  <RxCross1 />
+                <td
+                  className="cursor-pointer"
+                  onClick={() => deleteAdmin(admin?.userId, "admin")}
+                >
+                  <div
+                    className="tooltip tooltip-left"
+                    data-tip="Delete Student"
+                  >
+                    <RxCross1 />
+                  </div>
                 </td>
               </tr>
             );
