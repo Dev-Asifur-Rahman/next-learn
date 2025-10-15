@@ -46,6 +46,14 @@ const middleware = async (req) => {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }
+  if (pathname.startsWith("/add_course")) {
+    if (!token) {
+      return NextResponse.redirect(homeUrl);
+    }
+    if (token.role !== "instructor") {
+      return NextResponse.redirect(homeUrl);
+    }
+  }
 
   return NextResponse.next();
 };
