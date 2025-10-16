@@ -19,6 +19,7 @@ const NavBar = () => {
     { name: "Home", href: "/" },
     { name: "Courses", href: "/courses" },
     { name: "Dashboard", href: `/dashboard/${role}` },
+    { name: "Add Course", href: "/add_course" },
   ];
 
   const theme_controller = (e) => {

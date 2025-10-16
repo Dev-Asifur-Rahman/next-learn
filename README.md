@@ -18,8 +18,8 @@ NextLearn is an AI-powered learning platform that helps students, instructors, a
   - **Email**: `maruf@gmail.com`
   - **Password**: `Maruf1234`  
 - **Instructor Account**:  
-  - **Email**: `instructor@gmail.com`  
-  - **Password**: `Instructor1234`  
+  - **Email**: `tanvirahmed@gmail.com`  
+  - **Password**: `1234Tanvir`  
 - **Admin Account**:  
   - **Email**: `admin@gmail.com`  
   - **Password**: `Admin1234`  
