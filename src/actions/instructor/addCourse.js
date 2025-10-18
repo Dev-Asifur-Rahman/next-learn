@@ -30,7 +30,12 @@ export const addCourse = async (instructor_object) => {
       enrolledId: [],
       courseImage,
     };
-    console.log(course_object);
-    return { success: true, message: "course added" };
+    const result = await courses.insertOne(course_object)
+    if(result.insertedId){
+      return { success: true, message: "course added" };
+    } 
+    else {
+      return {success : false , message : 'course operation failed'}
+    }
   }
 };
