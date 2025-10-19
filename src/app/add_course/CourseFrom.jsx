@@ -1,5 +1,6 @@
 "use client";
 import { addCourse } from "@/actions/instructor/addCourse";
+import { allInstructorCourses } from "@/actions/instructor/getInstructorCourses";
 import imageUpload from "@/lib/imageUpload";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -12,11 +13,16 @@ const CourseFrom = () => {
 
   const [lessons, setLessons] = useState([]);
   const [lessonName, setLessonName] = useState(null);
-  const [totalLessons, setTotalLessons] = useState(0);
+  const [totalLessons, setTotalLessons] = useState([]);
 
   useEffect(() => {
-    console.log(lessons.length);
-  }, [lessons]);
+    const fetchCourses = async () => {
+      const courseId = user?._id;
+      const instructor_course = await allInstructorCourses(courseId);
+      setTotalLessons(instructor_course);
+    };
+    fetchCourses();
+  }, [user]);
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -98,9 +104,10 @@ const CourseFrom = () => {
               <option value="create" className="">
                 Create New
               </option>
-              <option value={"crimson"}>Crimson</option>
-              <option value={"amber"}>Amber</option>
-              <option value={"velvet"}>Velvet</option>
+              {totalLessons?.length !== 0 &&
+                totalLessons.map((lesson, index) => (
+                  <option key={index}>{lesson?.title}</option>
+                ))}
             </select>
           </div>
           <div className="w-full max-w-[260px]">
