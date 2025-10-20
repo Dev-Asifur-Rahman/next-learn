@@ -2,6 +2,7 @@
 import { addCourse } from "@/actions/instructor/addCourse";
 import { allInstructorCourses } from "@/actions/instructor/getInstructorCourses";
 import imageUpload from "@/lib/imageUpload";
+
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -14,6 +15,7 @@ const CourseFrom = () => {
   const [lessons, setLessons] = useState([]);
   const [lessonName, setLessonName] = useState(null);
   const [totalLessons, setTotalLessons] = useState([]);
+  const [submitButton, setSubmitButton] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -46,6 +48,7 @@ const CourseFrom = () => {
     e.preventDefault();
     const form = e.target;
     const loading = toast.loading("Loading");
+    setSubmitButton(true);
 
     const modal = document.getElementById("my_modal_1");
     // taking course info by modal
@@ -57,6 +60,7 @@ const CourseFrom = () => {
     if (!image) {
       toast.dismiss(loading);
       toast.error("Image Upload Failed");
+      setSubmitButton(false)
       modal.close();
       return;
     } else {
@@ -71,12 +75,17 @@ const CourseFrom = () => {
       if (result.success === true) {
         toast.dismiss(loading);
         toast.success("Course Created Successfully");
+        const courseId = user?._id;
+        const instructor_course = await allInstructorCourses(courseId);
+        setTotalLessons(instructor_course);
+        setSubmitButton(false)
         modal.close();
         return;
       } else {
         toast.dismiss(loading);
         toast.error("Something went wrong ! try again");
         modal.close();
+        setSubmitButton(false)
         form.reset();
         return;
       }
@@ -106,7 +115,9 @@ const CourseFrom = () => {
               </option>
               {totalLessons?.length !== 0 &&
                 totalLessons.map((lesson, index) => (
-                  <option key={index}>{lesson?.title}</option>
+                  <option key={index} value={lesson?.title}>
+                    {lesson?.title}
+                  </option>
                 ))}
             </select>
           </div>
@@ -174,7 +185,9 @@ const CourseFrom = () => {
               </div>
               {/* if there is a button in form, it will close the modal */}
               <div className="w-full flex items-center gap-2">
-                <button className="btn btn-outline">Confirm</button>
+                <button disabled={submitButton} className="btn btn-outline">
+                  Confirm
+                </button>
                 <button
                   type="button"
                   className="btn btn-outline"
