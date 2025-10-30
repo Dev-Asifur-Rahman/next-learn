@@ -37,10 +37,11 @@ const CourseFrom = () => {
   const getLesson = (e) => {
     const selectValue = e.target.value;
     if (selectValue === "create") {
-      // write created course and refetch
+      // created course and refetch
       document.getElementById("my_modal_1").showModal();
     } else {
       // write updated course
+      setLessonName(selectValue);
     }
   };
 
@@ -60,7 +61,7 @@ const CourseFrom = () => {
     if (!image) {
       toast.dismiss(loading);
       toast.error("Image Upload Failed");
-      setSubmitButton(false)
+      setSubmitButton(false);
       modal.close();
       return;
     } else {
@@ -78,14 +79,14 @@ const CourseFrom = () => {
         const courseId = user?._id;
         const instructor_course = await allInstructorCourses(courseId);
         setTotalLessons(instructor_course);
-        setSubmitButton(false)
+        setSubmitButton(false);
         modal.close();
         return;
       } else {
         toast.dismiss(loading);
         toast.error("Something went wrong ! try again");
         modal.close();
-        setSubmitButton(false)
+        setSubmitButton(false);
         form.reset();
         return;
       }
